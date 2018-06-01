@@ -5,7 +5,16 @@ class CourseRow extends React.Component {
     }
     render() {
         return (
-            <tr><td>{this.props.course.title}</td><td></td></tr>
+            <tr>
+                <td>{this.props.course.title}</td>
+                <td><button className="btn btn-danger">
+                    <i className="fa fa-times" onClick={() =>
+                        {this.props.delete(this.props.course.id)}}>
+                    </i>
+                    {/*Delete*/}
+                </button>
+                </td>
+            </tr>
         )
     }
 }
