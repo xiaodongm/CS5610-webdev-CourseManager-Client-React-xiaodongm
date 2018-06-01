@@ -1,4 +1,5 @@
 import React from 'react';
+import ModuleList from './ModuleList'
 class CourseEditor extends React.Component {
 
     constructor(props) {
@@ -20,7 +21,12 @@ class CourseEditor extends React.Component {
     }
 
     render() {
-        return (<h3>Editing Course : {this.state.courseId}</h3>)
+        return (
+            <div>
+                <h3>Editing Course : {this.state.courseId}</h3>
+                <ModuleList courseId={this.state.courseId}/>
+            </div>
+        )
     }
 }
 export default CourseEditor;
