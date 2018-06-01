@@ -12,10 +12,17 @@ class CourseList extends React.Component {
     }
 
     componentDidMount() {
-        this.courseService.findAllCourses()
+        this.findAllCourses();
+    }
+
+
+    findAllCourses() {
+        this.courseService
+            .findAllCourses()
             .then((courses) => {
+                console.log(courses);
                 this.setState({courses: courses});
-            });
+            })
     }
 
     renderCourseRows() {
@@ -40,10 +47,9 @@ class CourseList extends React.Component {
         });
     }
     createCourse() {
-        // this.courseService
-        //     .createCourse(this.state.course)
-        //     .then(() => { this.findAllCourses(); });
-        console.log(this.state.course);
+        this.courseService
+            .createCourse(this.state.course)
+            .then(() => { this.findAllCourses(); });
     }
 
 
@@ -57,7 +63,7 @@ class CourseList extends React.Component {
                     <tr>
                         <th><input onChange={this.titleChanged}
                                    className="form-control"  id="titleFld"
-                                   placeholder="cs101"/></th>
+                                   placeholder="New Course Title"/></th>
                         <th><button onClick={this.createCourse}
                                     className="btn btn-primary">
                             Add</button></th>
