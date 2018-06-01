@@ -24,7 +24,14 @@ class CourseEditor extends React.Component {
         return (
             <div>
                 <h3>Editing Course : {this.state.courseId}</h3>
-                <ModuleList courseId={this.state.courseId}/>
+                <div className="row">
+                    <div className="col-4">
+                        <ModuleList courseId={this.state.courseId}/>
+                    </div>
+                    <div className="col-8">
+                        {/*<LessonTabs/>*/}
+                    </div>
+                </div>
             </div>
         )
     }
