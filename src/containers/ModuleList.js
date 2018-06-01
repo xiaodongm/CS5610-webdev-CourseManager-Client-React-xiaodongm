@@ -12,6 +12,7 @@ export default class ModuleList extends React.Component {
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleTitle = this.setModuleTitle.bind(this);
         this.createModule = this.createModule.bind(this);
+        this.moduleService = ModuleService.instance;
 
     }
     setCourseId(courseId) {
@@ -23,7 +24,7 @@ export default class ModuleList extends React.Component {
     }
 
     createModule() {
-        ModuleService.createModule(this.state.courseId, this.state.module);
+        this.moduleService.createModule(this.state.courseId, this.state.module);
     }
 
     componentDidMount() {
