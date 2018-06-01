@@ -5,7 +5,7 @@ class CourseRow extends React.Component {
     }
     render() {
         return (
-            <tr><td>{this.props.course.title}</td></tr>
+            <tr><td>{this.props.course.title}</td><td></td></tr>
         )
     }
 }

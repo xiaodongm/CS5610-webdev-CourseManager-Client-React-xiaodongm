@@ -6,7 +6,9 @@ class CourseList extends React.Component {
     constructor() {
         super();
         this.courseService = CourseService.instance;
-        this.state = {courses: []};
+        // this.state = {courses: []};
+        this.titleChanged = this.titleChanged.bind(this);
+        this.createCourse = this.createCourse.bind(this);
     }
 
     componentDidMount() {
@@ -18,6 +20,7 @@ class CourseList extends React.Component {
 
     renderCourseRows() {
         let courses = null;
+        // console.log(this.state)
         if(this.state) {
             courses = this.state.courses.map(
                 function (course) {
@@ -31,6 +34,17 @@ class CourseList extends React.Component {
         )
     }
 
+    titleChanged(event) {
+        this.setState({
+            course: { title: event.target.value }
+        });
+    }
+    createCourse() {
+        // this.courseService
+        //     .createCourse(this.state.course)
+        //     .then(() => { this.findAllCourses(); });
+        console.log(this.state.course);
+    }
 
 
     render() {
@@ -39,11 +53,14 @@ class CourseList extends React.Component {
                 <h2>Course List</h2>
                 <table className="table">
                     <thead>
-                    <tr><th>Title</th></tr>
+                    <tr><th>Title</th><th></th></tr>
                     <tr>
-                        <th><input className="form-control"  id="titleFld"
+                        <th><input onChange={this.titleChanged}
+                                   className="form-control"  id="titleFld"
                                    placeholder="cs101"/></th>
-                        <th><button className="btn btn-primary">Add</button></th>
+                        <th><button onClick={this.createCourse}
+                                    className="btn btn-primary">
+                            Add</button></th>
                     </tr>
                     </thead>
                     <tbody>
