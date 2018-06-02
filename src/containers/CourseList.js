@@ -68,9 +68,8 @@ class CourseList extends React.Component {
                            onChange={this.titleChanged}
                            style={{marginRight: '12px'}}>
                     </input>
-                    <button className="btn btn-danger">
-                        <i className="fa fa-plus"
-                           onClick={this.createCourse}></i>
+                    <button className="btn btn-danger" onClick={this.createCourse}>
+                        <i className="fa fa-plus"></i>
                     </button>
                 </nav>
                 {/*<h2>Course List</h2>*/}
