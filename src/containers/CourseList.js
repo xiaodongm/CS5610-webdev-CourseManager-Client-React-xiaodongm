@@ -60,7 +60,7 @@ class CourseList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container-fluid">
                 <h2>Course List</h2>
                 <table className="table">
                     <thead>

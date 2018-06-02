@@ -1,5 +1,8 @@
 import React from 'react';
 import ModuleList from './ModuleList'
+import ModuleEditor from './ModuleEditor';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+
 class CourseEditor extends React.Component {
 
     constructor(props) {
@@ -22,6 +25,7 @@ class CourseEditor extends React.Component {
 
     render() {
         return (
+            <Router>
             <div>
                 <h3>Editing Course : {this.state.courseId}</h3>
                 <div className="row">
@@ -29,10 +33,12 @@ class CourseEditor extends React.Component {
                         <ModuleList courseId={this.state.courseId}/>
                     </div>
                     <div className="col-8">
-                        {/*<LessonTabs/>*/}
+                        <Route path="/course/:courseId/module/:moduleId"
+                               component={ModuleEditor}/>
                     </div>
                 </div>
             </div>
+            </Router>
         )
     }
 }
