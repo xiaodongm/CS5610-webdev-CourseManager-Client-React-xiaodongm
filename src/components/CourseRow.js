@@ -9,6 +9,7 @@ class CourseRow extends React.Component {
         return (
             <tr>
                 <td>
+                    <i className="fa fa-file-text" style={{marginRight: '12px', color: '#0080ff', marginLeft:'85px'}}></i>
                     <Link to={`/course/${this.props.course.id}/edit`}>
                     {this.props.course.title}
                     </Link>

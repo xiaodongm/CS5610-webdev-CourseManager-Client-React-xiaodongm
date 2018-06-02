@@ -60,19 +60,38 @@ class CourseList extends React.Component {
 
     render() {
         return (
-            <div className="container-fluid">
-                <h2>Course List</h2>
+            <div>
+                <nav className="navbar navbar-expand navbar-dark bg-primary sticky-top">
+                    <h1 className="navbar-brand">Course Manager</h1>
+                    <input className="form-control"
+                           placeholder="New Course Title"
+                           onChange={this.titleChanged}
+                           style={{marginRight: '12px'}}>
+                    </input>
+                    <button className="btn btn-danger">
+                        <i className="fa fa-plus"
+                           onClick={this.createCourse}></i>
+                    </button>
+                </nav>
+                {/*<h2>Course List</h2>*/}
                 <table className="table">
                     <thead>
-                    <tr><th>Title</th><th>Owned by</th><th>Last modified by</th><th></th></tr>
-                    <tr>
-                        <th><input onChange={this.titleChanged}
-                                   className="form-control"  id="titleFld"
-                                   placeholder="New Course Title"/></th>
-                        <th><button onClick={this.createCourse}
-                                    className="btn btn-primary">
-                            Add</button></th>
+                    <tr class="table-secondary">
+                        <th style={{paddingLeft:'100px'}} width="650px">Title</th>
+                        <th>Owned by</th>
+                        <th>Last modified by</th>
+                        <th>
+                            <i className="fa fa-th"></i>
+                        </th>
                     </tr>
+                    {/*<tr>*/}
+                        {/*<th><input onChange={this.titleChanged}*/}
+                                   {/*className="form-control"  id="titleFld"*/}
+                                   {/*placeholder="New Course Title"/></th>*/}
+                        {/*<th><button onClick={this.createCourse}*/}
+                                    {/*className="btn btn-primary">*/}
+                            {/*Add</button></th>*/}
+                    {/*</tr>*/}
                     </thead>
                     <tbody>
                         {this.renderCourseRows()}
