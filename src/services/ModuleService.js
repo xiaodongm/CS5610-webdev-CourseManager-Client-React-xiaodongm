@@ -22,7 +22,14 @@ export default class ModuleService {
         { return response.json(); })
     }
 
-
+    findAllModulesForCourse(courseId) {
+        return fetch(
+            MODULE_API_URL
+                .replace('CID', courseId))
+            .then(function (response) {
+                return response.json();
+            })
+    }
 
 
 

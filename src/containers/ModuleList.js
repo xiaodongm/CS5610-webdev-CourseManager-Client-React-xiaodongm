@@ -6,8 +6,9 @@ export default class ModuleList extends React.Component {
     constructor(props) {
         super(props);
         this.state =
-            {courseId: '',
-            module: {title: ''}
+                {courseId: '',
+                module: {title: ''},
+                modules: []
             };
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleTitle = this.setModuleTitle.bind(this);
@@ -23,8 +24,22 @@ export default class ModuleList extends React.Component {
         this.setState({module: {title: event.target.value}})
     }
 
+    setModules(modules) {
+        this.setState({modules: modules})
+    }
+
+    findAllModulesForCourse(courseId) {
+        this.moduleService
+            .findAllModulesForCourse(courseId)
+            .then((modules) => {this.setModules(modules)});
+    }
+
     createModule() {
-        this.moduleService.createModule(this.state.courseId, this.state.module);
+        this.moduleService.createModule(this.state.courseId, this.state.module)
+            .then(() => {
+                this.findAllModulesForCourse
+                (this.state.courseId);
+            })
     }
 
     componentDidMount() {
@@ -32,8 +47,17 @@ export default class ModuleList extends React.Component {
     }
     componentWillReceiveProps(newProps){
         this.setCourseId(newProps.courseId);
+        this.findAllModulesForCourse(newProps.courseId)
     }
 
+    renderModules() {
+        let modules = this.state.modules.map((module) => {
+            return <li key={module.id}>{module.title}</li>
+        });
+        return (
+            <ul>{modules}</ul>
+        )
+    }
 
     render() {
         return (
@@ -47,6 +71,7 @@ export default class ModuleList extends React.Component {
                         onClick={this.createModule}>
                     <i className="fa fa-plus"></i>
                 </button>
+                {this.renderModules()}
             </div>
 
     )
