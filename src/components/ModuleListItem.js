@@ -7,7 +7,14 @@ export default class ModuleListItem extends React.Component {
 
     render() {
         return (
-            <li>{this.props.module.title}</li>
+            <div>
+                {this.props.module.title}
+                <button className="btn btn-danger" >
+                    <i className="fa fa-times" onClick={() =>
+                        {this.props.delete(this.props.module.id)}}>
+                    </i>
+                </button>
+            </div>
         )
     }
 }
