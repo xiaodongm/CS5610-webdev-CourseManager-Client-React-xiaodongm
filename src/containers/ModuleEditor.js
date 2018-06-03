@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import CourseEditor from "./CourseEditor";
+import LessonEditor from "./LessonEditor";
+import LessonTabs from "./LessonTabs";
 export default class ModuleEditor
     extends React.Component {
 
@@ -33,12 +34,21 @@ export default class ModuleEditor
 
     render() {
         return (
-
+            <Router>
                 <div>
-                    <h1>Module Editor</h1>
-                    <h3>Editing Module {this.state.courseId}</h3>
-                    {this.state.moduleId}
+                    <div>
+                        {/*<h1>Module Editor</h1>*/}
+                        {/*<h3>Editing Module {this.state.courseId}</h3>*/}
+                        {/*{this.state.moduleId}*/}
+                        <LessonTabs moduleId={this.state.moduleId}/>
+                    </div>
+                    <div>
+                        <Route exact path="/course/:courseId/module/:moduleId/lesson/:lessonId"
+                               component={LessonEditor}>
+                        </Route>
+                    </div>
                 </div>
+            </Router>
 
     )
     }
