@@ -21,4 +21,14 @@ export default class LessonService {
         { return response.json(); })
     }
 
+    findAllLessonsForModule(moduleId) {
+        return fetch(
+            LESSON_API_URL
+                .replace('MID', moduleId))
+            .then(function (response) {
+                return response.json();
+            })
+    }
+
+
 }

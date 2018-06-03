@@ -9,7 +9,8 @@ export default class LessonTabs extends React.Component {
         this.state =
             {lesson: '',
             lessonId:'',
-            lesson: {title: ''}};
+            lesson: {title: ''},
+            lessons: []};
 
         this.setLessonTitle = this.setLessonTitle.bind(this);
         this.createLesson = this.createLesson.bind(this);
@@ -19,9 +20,18 @@ export default class LessonTabs extends React.Component {
 
     createLesson() {
         this.lessonService
-            .createLesson(
-                this.state.moduleId,
-                this.state.lesson);
+            .createLesson(this.state.moduleId, this.state.lesson)
+            .then(() => {this.findAllLessonForModule(this.state.moduleId);})
+    }
+
+    setLessons(lessons) {
+        this.setState({lessons: lessons})
+    }
+
+    findAllLessonForModule(moduleId){
+        this.lessonService
+            .findAllModulesForCourse(moduleId)
+            .then((lessons) => {this.setLessons(lessons)});
     }
 
 
@@ -38,6 +48,17 @@ export default class LessonTabs extends React.Component {
     }
     componentWillReceiveProps(newProps){
         this.setModuleId(newProps.moduleId);
+        this.findAllLessonForModule(newProps.moduleId)
+    }
+
+    renderLessons() {
+        let lessons = this.state.lessons.map((lesson) => {
+            return <li key={lesson.id}>{lesson.title}</li>
+        });
+        return (
+            lessons
+        )
+
     }
 
 
@@ -45,6 +66,7 @@ export default class LessonTabs extends React.Component {
     render() {
         return(
             <div>
+                {this.renderLessons()}
                 <input value={this.state.lesson.title}
                        placeholder="New Lesson"
                        onChange={this.setLessonTitle}/>

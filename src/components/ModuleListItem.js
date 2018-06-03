@@ -15,7 +15,7 @@ export default class ModuleListItem extends React.Component {
                 <Link to={`/course/${this.props.courseId}/module/${this.props.module.id}`}>
                     {this.props.module.title}
                 </Link>
-                    <i className="fa fa-window-close float-right" style={{color:'red'}} onClick={() =>
+                    <i className="fa fa-trash float-right" style={{color:'red'}} onClick={() =>
                     {if (window.confirm('Are you sure you wish to delete this Module?'))
                         this.props.delete(this.props.module.id)}}>
                     </i>

@@ -74,8 +74,9 @@ export default class ModuleList extends React.Component {
     }
 
     renderModules() {
-        let modules = this.state.modules.map((module) => { console.log(module)
-            return (<ModuleListItem courseId={this.state.courseId} key={module.id} module={module} delete={this.deleteModule}/>)
+        let modules = this.state.modules.map((module) => {
+            return (<ModuleListItem courseId={this.state.courseId} key={module.id}
+                                    module={module} delete={this.deleteModule}/>)
         });
         return (
             <ul>{modules}</ul>
