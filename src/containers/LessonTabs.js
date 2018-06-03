@@ -1,5 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import LessonService from '../services/LessonService';
+
 
 export default class LessonTabs extends React.Component {
 
@@ -12,11 +13,15 @@ export default class LessonTabs extends React.Component {
 
         this.setLessonTitle = this.setLessonTitle.bind(this);
         this.createLesson = this.createLesson.bind(this);
+        this.lessonService = LessonService.instance;
 
     }
 
     createLesson() {
-        console.log(this.state);
+        this.lessonService
+            .createLesson(
+                this.state.moduleId,
+                this.state.lesson);
     }
 
 
