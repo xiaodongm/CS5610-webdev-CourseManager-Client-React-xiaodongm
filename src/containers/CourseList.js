@@ -75,7 +75,7 @@ class CourseList extends React.Component {
                 {/*<h2>Course List</h2>*/}
                 <table className="table">
                     <thead>
-                    <tr class="table-secondary">
+                    <tr style={{background: '#e0e0eb'}}>
                         <th style={{paddingLeft:'100px'}} width="650px">Title</th>
                         <th>Owned by</th>
                         <th>Last modified by</th>

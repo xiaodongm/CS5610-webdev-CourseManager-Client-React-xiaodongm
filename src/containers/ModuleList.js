@@ -1,13 +1,15 @@
 import React from 'react';
 import ModuleService from '../services/ModuleService';
 import ModuleListItem from '../components/ModuleListItem';
+import CourseService from '../services/CourseService'
 
 export default class ModuleList extends React.Component {
 
     constructor(props) {
         super(props);
         this.state =
-                {courseId: '',
+                {course: '',
+                courseId: '',
                 module: {title: ''},
                 modules: []
             };
@@ -16,10 +18,22 @@ export default class ModuleList extends React.Component {
         this.createModule = this.createModule.bind(this);
         this.moduleService = ModuleService.instance;
         this.deleteModule = this.deleteModule.bind(this);
+        this.CourseService = CourseService.instance;
+        this.setCourse = this.setCourse.bind(this);
 
     }
     setCourseId(courseId) {
         this.setState({courseId: courseId});
+    }
+
+    setCourse(courseId){
+        this.CourseService.findCourseById(courseId).then(
+            (course) => {
+                this.setState({
+                    course: course
+                })
+            }
+        )
     }
 
     setModuleTitle(event) {
@@ -55,6 +69,7 @@ export default class ModuleList extends React.Component {
     }
     componentWillReceiveProps(newProps){
         this.setCourseId(newProps.courseId);
+        this.setCourse(newProps.courseId);
         this.findAllModulesForCourse(newProps.courseId)
     }
 
@@ -70,16 +85,22 @@ export default class ModuleList extends React.Component {
     render() {
         return (
             <div>
-                <h4>Module List for course: {this.state.courseId}</h4>
-                <input className="form-control"
-                       placeholder="New Module"
-                       value={this.state.module.title}
-                       onChange={this.setModuleTitle}/>
-                <button className="btn btn-primary btn-block"
-                        onClick={this.createModule}>
-                    <i className="fa fa-plus"></i>
-                </button>
+                <nav className="navbar navbar-expand navbar-dark sticky-top" style={{background:'#1b3f4a'}}>
+                <h4 style={{color:'white'}}>{this.state.course.title}</h4>
+                </nav>
                 {this.renderModules()}
+                <div className="input-group-append">
+                    <input className="form-control"
+                           placeholder="New Module"
+                           value={this.state.module.title}
+                           onChange={this.setModuleTitle}
+                           style={{marginTop:'20px', marginLeft:'20px', marginBottom:'20px',}}/>
+                    <button className="btn btn-primary"
+                            onClick={this.createModule}
+                            style={{margin:'20px'}}>
+                        <i className="fa fa-plus"></i>
+                    </button>
+                </div>
             </div>
 
     )
