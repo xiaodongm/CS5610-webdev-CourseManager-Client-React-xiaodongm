@@ -2,23 +2,50 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default class LessonTabs extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    // }
+
+    constructor(props) {
+        super(props);
+        this.state =
+            {lesson: '',
+            lessonId:'',
+            lesson: {title: ''}};
+
+        this.setLessonTitle = this.setLessonTitle.bind(this);
+        this.createLesson = this.createLesson.bind(this);
+
+    }
+
+    createLesson() {
+        console.log(this.state);
+    }
+
+
+    setLessonTitle(event) {
+        this.setState({Lesson: {title: event.target.value}})
+    }
+
+    setModuleId(moduleId) {
+        this.setState({moduleId: moduleId});
+    }
+
+    componentDidMount() {
+        this.setModuleId(this.props.moduleId);
+    }
+    componentWillReceiveProps(newProps){
+        this.setModuleId(newProps.moduleId);
+    }
+
+
 
     render() {
         return(
             <div>
-                {/*<Link to={`/course/${this.props.courseId}/module/${this.props.module.id}/lesson/${this.props.LessonTabs.id}`}>*/}
-                    {/*{this.props.module.title}*/}
-                {/*</Link>*/}
-                <ul className="nav nav-tabs">
-                    <li className="nav-item"><a className="nav-link active"
-                                                href="#">Active Tab</a></li>
-                    <li className="nav-item"><a className="nav-link"
-                                                href="#">Another Tab</a></li>
-                </ul>
+                <input value={this.state.lesson.title}
+                       placeholder="New Lesson"
+                       onChange={this.setLessonTitle}/>
+                <button onClick={this.createLesson}>Create</button>
             </div>
+
         );
     }
 }
