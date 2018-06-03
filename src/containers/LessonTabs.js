@@ -1,5 +1,7 @@
 import React from 'react'
 import LessonService from '../services/LessonService';
+import LessonTabItem from '../components/LessonTabItem';
+
 
 
 export default class LessonTabs extends React.Component {
@@ -53,7 +55,8 @@ export default class LessonTabs extends React.Component {
 
     renderLessons() {
         let lessons = this.state.lessons.map((lesson) => {
-            return <li key={lesson.id}>{lesson.title}</li>
+            return (<LessonTabItem key={lesson.id}
+                                    lesson={lesson}/>)
         });
         return (
             lessons
