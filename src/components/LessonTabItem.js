@@ -33,7 +33,11 @@ export default class LessonTabItem extends React.Component {
 
     render() {
         return (
-            <li>{this.props.lesson.title}</li>
-        )
+            <li>{this.props.lesson.title}
+            <button onClick={() => {this.props.delete(this.props.lesson.id)}}>
+                DELETE</button>
+            </li>
+
+    )
     }
 }

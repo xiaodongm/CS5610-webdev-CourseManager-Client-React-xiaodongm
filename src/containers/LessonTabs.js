@@ -17,6 +17,7 @@ export default class LessonTabs extends React.Component {
         this.setLessonTitle = this.setLessonTitle.bind(this);
         this.createLesson = this.createLesson.bind(this);
         this.lessonService = LessonService.instance;
+        this.deleteLesson = this.deleteLesson.bind(this);
 
     }
 
@@ -26,13 +27,22 @@ export default class LessonTabs extends React.Component {
             .then(() => {this.findAllLessonForModule(this.state.moduleId);})
     }
 
+    deleteLesson(lessonId) {
+        this.lessonService
+            .deleteLesson(lessonId)
+            .then(() => {
+                this.findAllLessonForModule(this.state.moduleId)
+            });
+    }
+
+
     setLessons(lessons) {
         this.setState({lessons: lessons})
     }
 
     findAllLessonForModule(moduleId){
         this.lessonService
-            .findAllModulesForCourse(moduleId)
+            .findAllLessonsForModule(moduleId)
             .then((lessons) => {this.setLessons(lessons)});
     }
 
@@ -56,7 +66,8 @@ export default class LessonTabs extends React.Component {
     renderLessons() {
         let lessons = this.state.lessons.map((lesson) => {
             return (<LessonTabItem key={lesson.id}
-                                    lesson={lesson}/>)
+                                   lesson={lesson}
+                                   delete={this.deleteLesson}/>)
         });
         return (
             lessons
