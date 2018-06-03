@@ -88,7 +88,10 @@ export default class ModuleList extends React.Component {
             <div>
                 <nav className="navbar navbar-expand navbar-dark sticky-top"
                      style={{background:'#1b3f4a', marginRight:'-15px'}}>
-                <h4 style={{color:'white'}}>{this.state.course.title}</h4>
+                    <button className="btn btn-primary" style={{margin:'8px'}}>
+                        <i className="fa fa-arrow-left"></i>
+                    </button>
+                <h4 style={{color:'white', marginLeft:'12px', marginBottom:'-1px'}}>{this.state.course.title}</h4>
                 </nav>
                 {this.renderModules()}
                 <div className="input-group-append">

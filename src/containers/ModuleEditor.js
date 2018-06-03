@@ -1,9 +1,9 @@
 import React from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+import {Route} from 'react-router-dom'
 import LessonEditor from "./LessonEditor";
 import LessonTabs from "./LessonTabs";
-export default class ModuleEditor
-    extends React.Component {
+
+export default class ModuleEditor extends React.Component {
 
     constructor(props) {
         super(props);
@@ -12,12 +12,10 @@ export default class ModuleEditor
         this.state = {courseId: '', moduleId: ''};}
 
     setCourseId(courseId) {
-        this.setState
-        ({courseId: courseId});
+        this.setState({courseId: courseId});
     }
     setModuleId(moduleId) {
-        this.setState
-        ({moduleId: moduleId});
+        this.setState({moduleId: moduleId});
     }
 
     componentDidMount() {
@@ -34,22 +32,16 @@ export default class ModuleEditor
 
     render() {
         return (
-            <Router>
-                <div>
-                    <div>
-                        {/*<h1>Module Editor</h1>*/}
-                        {/*<h3>Editing Module {this.state.courseId}</h3>*/}
-                        {/*{this.state.moduleId}*/}
+                <div className="container">
+                    <div className="row">
                         <LessonTabs moduleId={this.state.moduleId}/>
                     </div>
-                    <div>
-                        <Route exact path="/course/:courseId/module/:moduleId/lesson/:lessonId"
+                    <div className="row">
+                        <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
                                component={LessonEditor}>
                         </Route>
                     </div>
                 </div>
-            </Router>
-
     )
     }
 }

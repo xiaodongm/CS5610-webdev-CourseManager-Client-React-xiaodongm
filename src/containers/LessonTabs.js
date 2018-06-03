@@ -9,8 +9,7 @@ export default class LessonTabs extends React.Component {
     constructor(props) {
         super(props);
         this.state =
-            {lesson: '',
-            lessonId:'',
+            {lessonId:'',
             lesson: {title: ''},
             lessons: []};
 
@@ -80,11 +79,14 @@ export default class LessonTabs extends React.Component {
     render() {
         return(
             <div>
+                <div className="input-group-append">
+                    <input value={this.state.lesson.title}
+                           placeholder="New Lesson"
+                           onChange={this.setLessonTitle}
+                           className="form-control"/>
+                    <button className="btn btn-primary" onClick={this.createLesson}>Create</button>
+                </div>
                 {this.renderLessons()}
-                <input value={this.state.lesson.title}
-                       placeholder="New Lesson"
-                       onChange={this.setLessonTitle}/>
-                <button onClick={this.createLesson}>Create</button>
             </div>
 
         );

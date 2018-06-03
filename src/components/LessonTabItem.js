@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 export default class LessonTabItem extends React.Component {
 
@@ -9,19 +9,18 @@ export default class LessonTabItem extends React.Component {
 
     render() {
         return (
-            <li>
-                <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>
-                    {this.props.lesson.title}
-                </Link>
+            <div className="input-group-append">
+                {/*<Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>*/}
+                    {/*{this.props.lesson.title}*/}
+                {/*</Link>*/}
+                {/*{this.props.lesson.title}*/}
                 <ul className="nav nav-tabs">
                     <li className="nav-item"><a className="nav-link active"
-                                                href="#">Active Tab</a></li>
-                    <li className="nav-item"><a className="nav-link"
-                                                href="#">Another Tab</a></li>
+                                                href="#">{this.props.lesson.title}</a></li>
                 </ul>
-                <button onClick={() => {this.props.delete(this.props.lesson.id)}}>
+                <button className="btn btn-danger" onClick={() => {this.props.delete(this.props.lesson.id)}}>
                 DELETE</button>
-            </li>
+            </div>
 
     )
     }
