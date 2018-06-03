@@ -10,7 +10,7 @@ export default class ModuleList extends React.Component {
         this.state =
                 {course: '',
                 courseId: '',
-                module: {title: ''},
+                module: {title: 'New Module'},
                 modules: []
             };
         this.setCourseId = this.setCourseId.bind(this);
@@ -74,8 +74,8 @@ export default class ModuleList extends React.Component {
     }
 
     renderModules() {
-        let modules = this.state.modules.map((module) => {
-            return (<ModuleListItem key={module.id} module={module} delete={this.deleteModule}/>)
+        let modules = this.state.modules.map((module) => { console.log(module)
+            return (<ModuleListItem courseId={this.state.courseId} key={module.id} module={module} delete={this.deleteModule}/>)
         });
         return (
             <ul>{modules}</ul>
@@ -85,7 +85,8 @@ export default class ModuleList extends React.Component {
     render() {
         return (
             <div>
-                <nav className="navbar navbar-expand navbar-dark sticky-top" style={{background:'#1b3f4a'}}>
+                <nav className="navbar navbar-expand navbar-dark sticky-top"
+                     style={{background:'#1b3f4a', marginRight:'-15px'}}>
                 <h4 style={{color:'white'}}>{this.state.course.title}</h4>
                 </nav>
                 {this.renderModules()}

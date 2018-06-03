@@ -33,18 +33,12 @@ export default class ModuleEditor
 
     render() {
         return (
-            <Router>
+
                 <div>
                     <h1>Module Editor</h1>
                     <h3>Editing Module {this.state.courseId}</h3>
                     {this.state.moduleId}
                 </div>
-                {/*<div>*/}
-                    {/*/!*<Route exact path="/course/:courseId/module/:moduleId/lesson/:lessonId"*!/*/}
-                           {/*/!*component={CourseEditor}>*!/*/}
-                    {/*/!*</Route>*!/*/}
-                {/*</div>*/}
-            </Router>
 
     )
     }

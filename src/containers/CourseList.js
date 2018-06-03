@@ -6,14 +6,20 @@ class CourseList extends React.Component {
     constructor() {
         super();
         this.courseService = CourseService.instance;
-        this.state = {courses: []};
+        this.state = {courses: [],
+                     course: {title: 'New Course'},};
         this.titleChanged = this.titleChanged.bind(this);
         this.createCourse = this.createCourse.bind(this);
         this.deleteCourse = this.deleteCourse.bind(this);
+        this.setCourseTitle = this.setCourseTitle.bind(this);
     }
 
     componentDidMount() {
         this.findAllCourses();
+    }
+
+    setCourseTitle(event){
+        this.setState({course: {title: event.target.value}})
     }
 
 
