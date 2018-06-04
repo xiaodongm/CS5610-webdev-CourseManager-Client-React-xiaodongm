@@ -14,7 +14,8 @@ export default class TopicList extends React.Component {
         this.setTopicTitle = this.setTopicTitle.bind(this);
         this.createTopic = this.createTopic.bind(this);
         this.topicService = TopicService.instance;
-        this.findAllTopicsForLesson(newProps.lessonId)
+        this.deleteTopic = this.deleteTopic.bind(this);
+
     }
     setLessonId(lessonId) {
         this.setState({lessonId: lessonId});
@@ -32,6 +33,14 @@ export default class TopicList extends React.Component {
 
     }
 
+    deleteTopic(topicId) {
+        this.topicService
+            .deleteTopic(topicId)
+            .then(() => {this.findAllTopicsForLesson(this.state.LessonId)
+            });
+    }
+
+
     findAllTopicsForLesson(lessonId) {
         this.topicService
             .findAllTopicsForLesson(lessonId)
@@ -48,13 +57,15 @@ export default class TopicList extends React.Component {
     }
     componentWillReceiveProps(newProps){
         this.setLessonId(newProps.lessonId);
+        this.findAllTopicsForLesson(newProps.lessonId)
     }
 
 
     renderTopics() {
         let topics = this.state.topics.map((topic) => {
             return (<TopicListItem key={topic.id}
-                                    module={topic}/>)
+                                    module={topic}
+                                   delete={this.deleteTopic}/>)
         });
         return (
             <ul>{topics}</ul>
