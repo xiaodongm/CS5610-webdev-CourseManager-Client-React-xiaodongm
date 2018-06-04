@@ -27,8 +27,7 @@ export default class TopicService {
     }
 
     deleteTopic(topicId) {
-        return fetch(TOPIC_ID_API_URL.replace
-        ('TOPIC_ID', topicId), {
+        return fetch(TOPIC_ID_API_URL.replace('TOPIC_ID', topicId), {
             method: 'delete'
         })
     }

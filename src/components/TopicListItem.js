@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 export default class TopicListItem extends React.Component {
 
@@ -7,10 +8,12 @@ export default class TopicListItem extends React.Component {
     }
 
 
-
     render() {
         return (
-            <li>{this.props.topic.title}
+            <li>
+                <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.props.topicId}`}>
+                    {this.props.topic.title}
+                </Link>
                 <button onClick={() =>
                 {this.props.delete
                 (this.props.topic.id)}}>

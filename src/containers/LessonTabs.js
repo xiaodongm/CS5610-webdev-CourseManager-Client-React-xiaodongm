@@ -9,8 +9,7 @@ export default class LessonTabs extends React.Component {
     constructor(props) {
         super(props);
         this.state =
-            {lessonId:'',
-            moduleId: '',
+            {moduleId: '',
             lesson: {title: 'New Lesson'},
             lessons: []};
 
@@ -36,9 +35,6 @@ export default class LessonTabs extends React.Component {
             });
     }
 
-    setModuleId(moduleId) {
-        this.setState({moduleId: moduleId});
-    }
 
 
     setLessons(lessons) {

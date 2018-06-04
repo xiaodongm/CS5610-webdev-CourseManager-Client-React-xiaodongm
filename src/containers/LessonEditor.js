@@ -1,4 +1,8 @@
 import React from 'react';
+import {Route} from 'react-router-dom'
+import TopicEditor from "./TopicEditor";
+import TopicList from "./TopicList";
+
 export default class LessonEditor extends React.Component {
 
     constructor(props) {
@@ -39,10 +43,17 @@ export default class LessonEditor extends React.Component {
     render() {
         return (
             <div>
-            <h1>Lesson Editor</h1>
-            {this.state.courseId},
-            {this.state.moduleId},
-            {this.state.lessonId}
+                {/*<h1>Lesson Editor</h1>*/}
+                {/*{this.state.courseId},*/}
+                {/*{this.state.moduleId},*/}
+                {/*{this.state.lessonId}*/}
+                <div>
+                    <TopicList lessonId={this.state.lessonId}/>
+                </div>
+                <div>
+                    <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId"
+                           component={TopicEditor}/>
+                </div>
             </div>
 
     )

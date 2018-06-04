@@ -11,7 +11,8 @@ export default class ModuleList extends React.Component {
                 {course: '',
                 courseId: '',
                 module: {title: 'New Module'},
-                modules: []
+                modules: [],
+                selectedModuleItem: ''
             };
         this.setCourseId = this.setCourseId.bind(this);
         this.setModuleTitle = this.setModuleTitle.bind(this);
@@ -20,6 +21,7 @@ export default class ModuleList extends React.Component {
         this.deleteModule = this.deleteModule.bind(this);
         this.CourseService = CourseService.instance;
         this.setCourse = this.setCourse.bind(this);
+        this.setSelectedModuleItem = this.setSelectedModuleItem.bind(this);
 
     }
     setCourseId(courseId) {
@@ -34,6 +36,10 @@ export default class ModuleList extends React.Component {
                 })
             }
         )
+    }
+
+    setSelectedModuleItem(selectedModuleItem){
+        this.setState({selectedModuleItem: selectedModuleItem});
     }
 
     setModuleTitle(event) {
@@ -76,7 +82,9 @@ export default class ModuleList extends React.Component {
     renderModules() {
         let modules = this.state.modules.map((module) => {
             return (<ModuleListItem courseId={this.state.courseId} key={module.id}
-                                    module={module} delete={this.deleteModule}/>)
+                                    module={module} delete={this.deleteModule}
+                                    selectedModuleItem={this.state.selectedModuleItem}
+                                    setSelectedModuleItem={this.setSelectedModuleItem}/>)
         });
         return (
             <ul>{modules}</ul>
