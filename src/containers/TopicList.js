@@ -11,6 +11,8 @@ export default class TopicList extends React.Component {
         this.setLessonId = this.setLessonId.bind(this);
         this.setTopicTitle = this.setTopicTitle.bind(this);
         this.createTopic = this.createTopic.bind(this);
+        this.topicService = TopicService.instance;
+
 
 
     }
@@ -23,11 +25,8 @@ export default class TopicList extends React.Component {
     }
 
     createTopic() {
-        TopicService
-            .createTopic(
-                this.state.lessonId,
-                this.state.topic);
-
+        this.topicService
+            .createTopic(this.state.lessonId, this.state.topic);
     }
 
 
