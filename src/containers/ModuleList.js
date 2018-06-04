@@ -83,6 +83,7 @@ export default class ModuleList extends React.Component {
         )
     }
 
+
     render() {
         return (
             <div>
@@ -97,7 +98,6 @@ export default class ModuleList extends React.Component {
                 <div className="input-group-append">
                     <input className="form-control"
                            placeholder="New Module"
-                           value={this.state.module.title}
                            onChange={this.setModuleTitle}
                            style={{marginTop:'20px', marginLeft:'20px', marginBottom:'20px',}}/>
                     <button className="btn btn-primary"

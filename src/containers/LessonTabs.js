@@ -10,13 +10,15 @@ export default class LessonTabs extends React.Component {
         super(props);
         this.state =
             {lessonId:'',
-            lesson: {title: ''},
+            moduleId: '',
+            lesson: {title: 'New Lesson'},
             lessons: []};
 
         this.setLessonTitle = this.setLessonTitle.bind(this);
         this.createLesson = this.createLesson.bind(this);
         this.lessonService = LessonService.instance;
         this.deleteLesson = this.deleteLesson.bind(this);
+        this.setModuleId = this.setModuleId.bind(this);
 
     }
 
@@ -34,6 +36,10 @@ export default class LessonTabs extends React.Component {
             });
     }
 
+    setModuleId(moduleId) {
+        this.setState({moduleId: moduleId});
+    }
+
 
     setLessons(lessons) {
         this.setState({lessons: lessons})
@@ -47,7 +53,7 @@ export default class LessonTabs extends React.Component {
 
 
     setLessonTitle(event) {
-        this.setState({Lesson: {title: event.target.value}})
+        this.setState({lesson: {title: event.target.value}})
     }
 
     setModuleId(moduleId) {
@@ -64,12 +70,15 @@ export default class LessonTabs extends React.Component {
 
     renderLessons() {
         let lessons = this.state.lessons.map((lesson) => {
-            return (<LessonTabItem key={lesson.id}
+            return (<LessonTabItem moduleId={this.state.moduleId}
+                                    key={lesson.id}
                                    lesson={lesson}
                                    delete={this.deleteLesson}/>)
         });
         return (
-            lessons
+            <div className="input-group-append">
+                {lessons}
+            </div>
         )
 
     }
@@ -80,11 +89,10 @@ export default class LessonTabs extends React.Component {
         return(
             <div>
                 <div className="input-group-append">
-                    <input value={this.state.lesson.title}
-                           placeholder="New Lesson"
+                    <input placeholder="New Lesson"
                            onChange={this.setLessonTitle}
                            className="form-control"/>
-                    <button className="btn btn-primary" onClick={this.createLesson}>Create</button>
+                    <button className="btn btn-success" onClick={this.createLesson}>Create New Lesson</button>
                 </div>
                 {this.renderLessons()}
             </div>

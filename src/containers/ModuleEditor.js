@@ -33,7 +33,7 @@ export default class ModuleEditor extends React.Component {
     render() {
         return (
                 <div className="container">
-                    <div className="row">
+                    <div style={{background: '#1b3f4a'}}>
                         <LessonTabs moduleId={this.state.moduleId}/>
                     </div>
                     <div className="row">

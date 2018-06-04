@@ -18,7 +18,9 @@ export default class LessonTabItem extends React.Component {
                     <li className="nav-item"><a className="nav-link active"
                                                 href="#">{this.props.lesson.title}</a></li>
                 </ul>
-                <button className="btn btn-danger" onClick={() => {this.props.delete(this.props.lesson.id)}}>
+                <button className="btn btn-danger" onClick={() =>
+                {if (window.confirm('Are you sure you wish to delete this Lesson?'))
+                    this.props.delete(this.props.lesson.id)}}>
                 DELETE</button>
             </div>
 
