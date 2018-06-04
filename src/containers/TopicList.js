@@ -7,14 +7,13 @@ export default class TopicList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {lessonId: '',
-                      topic: {title: ''}};
+                      topic: {title: ''},
+                      topics: []};
         this.setLessonId = this.setLessonId.bind(this);
         this.setTopicTitle = this.setTopicTitle.bind(this);
         this.createTopic = this.createTopic.bind(this);
         this.topicService = TopicService.instance;
-
-
-
+        this.findAllTopicsForLesson(newProps.lessonId)
     }
     setLessonId(lessonId) {
         this.setState({lessonId: lessonId});
@@ -26,7 +25,19 @@ export default class TopicList extends React.Component {
 
     createTopic() {
         this.topicService
-            .createTopic(this.state.lessonId, this.state.topic);
+            .createTopic(this.state.lessonId, this.state.topic)
+            .then(() => {this.findAllTopicsForLesson(this.state.lessonId);
+            })
+
+    }
+
+    findAllTopicsForLesson(lessonId) {
+        this.topicService
+            .findAllTopicsForLesson(lessonId)
+            .then((topics) => {this.setTopics(topics)});
+    }
+    setTopics(topics) {
+        this.setState({topics: topics})
     }
 
 
@@ -39,6 +50,15 @@ export default class TopicList extends React.Component {
     }
 
 
+    renderTopics() {
+        let topics = this.state.topics.map((topic) => {
+            return <li key={topic.id}>{topic.title}</li>
+        });
+        return (
+            <ul>{topics}</ul>
+        )
+
+    }
 
 
     render() {
@@ -51,6 +71,7 @@ export default class TopicList extends React.Component {
                        onChange={this.setTopicTitle}
                        onClick={this.createTopic}/>
                 <button>Create</button>
+                {this.renderTopics()}
             </div>
 
         )

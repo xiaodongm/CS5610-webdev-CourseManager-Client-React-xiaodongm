@@ -24,6 +24,15 @@ export default class TopicService {
     }
 
 
+    findAllTopicsForLesson(lessonId) {
+        return fetch(
+            TOPIC_API_URL.replace('LID', lessonId))
+            .then(function (response) {
+                return response.json();
+            })
+    }
+
+
 
 
 
