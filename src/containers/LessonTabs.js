@@ -13,13 +13,15 @@ export default class LessonTabs extends React.Component {
             course:'',
             lesson: {title: 'New Lesson'},
             lessons: [],
-            courseId: ''};
+            courseId: '',
+            selectedLessonTab: ''};
 
         this.setLessonTitle = this.setLessonTitle.bind(this);
         this.createLesson = this.createLesson.bind(this);
         this.lessonService = LessonService.instance;
         this.deleteLesson = this.deleteLesson.bind(this);
         this.setModuleId = this.setModuleId.bind(this);
+        this.setSelectedLessonTab = this.setSelectedLessonTab.bind(this);
 
     }
 
@@ -35,6 +37,10 @@ export default class LessonTabs extends React.Component {
             .then(() => {
                 this.findAllLessonForModule(this.state.moduleId)
             });
+    }
+
+    setSelectedLessonTab(selectedLessonTab){
+        this.setState({selectedLessonTab: selectedLessonTab});
     }
 
 
@@ -72,7 +78,9 @@ export default class LessonTabs extends React.Component {
                                    courseId={this.props.courseId}
                                    lessonId={lesson.id}
                                    lesson={lesson}
-                                   delete={this.deleteLesson}/>)
+                                   delete={this.deleteLesson}
+                                   selectedLessonTab={this.state.selectedLessonTab}
+                                   setSelectedLessonTab={this.setSelectedLessonTab}/>)
         });
         return (
             <div className="input-group-append">
@@ -93,7 +101,9 @@ export default class LessonTabs extends React.Component {
                            className="form-control"/>
                     <button className="btn btn-success" onClick={this.createLesson}>Create New Lesson</button>
                 </div>
+                <div>
                 {this.renderLessons()}
+                </div>
             </div>
 
         );

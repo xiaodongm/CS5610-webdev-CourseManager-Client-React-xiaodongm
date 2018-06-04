@@ -65,11 +65,11 @@ export default class TopicList extends React.Component {
         let topics = this.state.topics.map((topic) => {
             return (<TopicListItem lessonId={this.state.lessonId}
                                     key={topic.id}
-                                    module={topic}
+                                    topic={topic}
                                    delete={this.deleteTopic}/>)
         });
         return (
-            <ul>{topics}</ul>
+            topics
         )
 
     }
@@ -77,13 +77,14 @@ export default class TopicList extends React.Component {
 
     render() {
         return (
-            <div>
-                <h4>Topic List for lessonId:
-                    {this.state.lessonId}</h4>
+            <div className="container" style={{marginTop: '10px'}}>
+                <div className="input-group-append" style={{marginBottom:"10px"}}>
                 <input placeholder="New Topic"
                        onChange={this.setTopicTitle}
-                       onClick={this.createTopic}/>
-                <button>Create</button>
+                       className="form-control"/>
+                <button className="btn btn-success"
+                        onClick={this.createTopic}>Create</button>
+                </div>
                 {this.renderTopics()}
             </div>
 

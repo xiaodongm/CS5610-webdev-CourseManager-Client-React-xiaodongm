@@ -5,6 +5,17 @@ export default class LessonTabItem extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state={
+            style:{}
+        }
+    }
+
+    componentWillReceiveProps(newProps){
+        if(newProps.selectedLessonTab === this.props.lesson.id){
+            this.setState({style:{background:'#ffc6fc'}});
+        }else{
+            this.setState({style:{}});
+        }
     }
 
     render() {
@@ -19,9 +30,12 @@ export default class LessonTabItem extends React.Component {
                         {/*<Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>*/}
                         {/*{this.props.lesson.title}*/}
                         {/*</Link></li>*/}
-                    <li className="nav-item"><Link className="nav-link active"
-                        to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>
-                        {this.props.lesson.title}
+                    <li className="nav-item">
+                        <Link   className="nav-link active"
+                                style={this.state.style}
+                                onClick={() =>{this.props.setSelectedLessonTab(this.props.lesson.id);}}
+                                to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>
+                                {this.props.lesson.title}
                     </Link></li>
                 </ul>
                 <button className="btn btn-danger" onClick={() =>
