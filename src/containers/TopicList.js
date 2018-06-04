@@ -1,5 +1,6 @@
 import React from 'react';
 import TopicService from '../services/TopicService';
+import TopicListItem from '../components/TopicListItem';
 
 
 export default class TopicList extends React.Component {
@@ -52,7 +53,8 @@ export default class TopicList extends React.Component {
 
     renderTopics() {
         let topics = this.state.topics.map((topic) => {
-            return <li key={topic.id}>{topic.title}</li>
+            return (<TopicListItem key={topic.id}
+                                    module={topic}/>)
         });
         return (
             <ul>{topics}</ul>
