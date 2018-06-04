@@ -10,8 +10,10 @@ export default class LessonTabs extends React.Component {
         super(props);
         this.state =
             {moduleId: '',
+            course:'',
             lesson: {title: 'New Lesson'},
-            lessons: []};
+            lessons: [],
+            courseId: ''};
 
         this.setLessonTitle = this.setLessonTitle.bind(this);
         this.createLesson = this.createLesson.bind(this);
@@ -34,7 +36,6 @@ export default class LessonTabs extends React.Component {
                 this.findAllLessonForModule(this.state.moduleId)
             });
     }
-
 
 
     setLessons(lessons) {
@@ -68,6 +69,8 @@ export default class LessonTabs extends React.Component {
         let lessons = this.state.lessons.map((lesson) => {
             return (<LessonTabItem moduleId={this.state.moduleId}
                                     key={lesson.id}
+                                   courseId={this.props.courseId}
+                                   lessonId={lesson.id}
                                    lesson={lesson}
                                    delete={this.deleteLesson}/>)
         });
@@ -84,7 +87,7 @@ export default class LessonTabs extends React.Component {
     render() {
         return(
             <div>
-                <div className="input-group-append">
+                <div className="input-group-append" style={{marginBottom:'10px', paddingTop:'10px'}}>
                     <input placeholder="New Lesson"
                            onChange={this.setLessonTitle}
                            className="form-control"/>

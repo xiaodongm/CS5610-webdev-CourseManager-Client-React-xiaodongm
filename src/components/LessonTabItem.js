@@ -13,15 +13,17 @@ export default class LessonTabItem extends React.Component {
                 {/*<Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>*/}
                     {/*{this.props.lesson.title}*/}
                 {/*</Link>*/}
-                {/*<ul className="nav nav-tabs">*/}
+                <ul className="nav nav-tabs">
 
-                    <li className="nav-item">
-                        <Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>
+                    {/*<li className="nav-item">*/}
+                        {/*<Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>*/}
+                        {/*{this.props.lesson.title}*/}
+                        {/*</Link></li>*/}
+                    <li className="nav-item"><Link className="nav-link active"
+                        to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>
                         {this.props.lesson.title}
-                        </Link></li>
-                    {/*<li className="nav-item"><a className="nav-link active"*/}
-                                                {/*href="#">{this.props.lesson.title}</a></li>*/}
-                {/*</ul>*/}
+                    </Link></li>
+                </ul>
                 <button className="btn btn-danger" onClick={() =>
                 {if (window.confirm('Are you sure you wish to delete this Lesson?'))
                     this.props.delete(this.props.lesson.id)}}>

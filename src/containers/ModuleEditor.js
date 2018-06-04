@@ -34,7 +34,7 @@ export default class ModuleEditor extends React.Component {
         return (
                 <div className="container">
                     <div style={{background: '#1b3f4a'}}>
-                        <LessonTabs moduleId={this.state.moduleId}/>
+                        <LessonTabs courseId={this.props.match.params.courseId} moduleId={this.state.moduleId}/>
                     </div>
                     <div className="row">
                         <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"

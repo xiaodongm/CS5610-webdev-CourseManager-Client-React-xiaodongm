@@ -15,8 +15,7 @@ export default class TopicListItem extends React.Component {
                     {this.props.topic.title}
                 </Link>
                 <button onClick={() =>
-                {this.props.delete
-                (this.props.topic.id)}}>
+                {this.props.delete(this.props.topic.id)}}>
                     DELETE</button>
             </li>
         )
