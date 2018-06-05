@@ -1,8 +1,9 @@
 let _singleton = Symbol();
 const MODULE_API_URL =
-    'http://localhost:8080/api/course/CID/module';
+    // 'http://localhost:8080/api/course/CID/module';
+    'https://webdev-summerfull-2018-xma.herokuapp.com/api/course/CID/module';
 const MODULE_ID_API_URL =
-    'http://localhost:8080/api/module/MODULE_ID';
+    'http://webdev-summerfull-2018-xma.herokuapp.com/api/module/MODULE_ID';
 
 export default class ModuleService {
     constructor(singletonToken) {

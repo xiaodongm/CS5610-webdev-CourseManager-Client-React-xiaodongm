@@ -1,7 +1,7 @@
 let _singleton = Symbol();
 const COURSE_API_URL =
-    'http://localhost:8080/api/course';
-    // 'https://course-manager.herokuapp.com/api/course';
+    // 'http://localhost:8080/api/course';
+    'https://webdev-summerfull-2018-xma.herokuapp.com/api/course'
 
 class CourseService {
     constructor(singletonToken) {

@@ -87,14 +87,6 @@ class CourseList extends React.Component {
                             <i className="fa fa-th"></i>
                         </th>
                     </tr>
-                    {/*<tr>*/}
-                        {/*<th><input onChange={this.titleChanged}*/}
-                                   {/*className="form-control"  id="titleFld"*/}
-                                   {/*placeholder="New Course Title"/></th>*/}
-                        {/*<th><button onClick={this.createCourse}*/}
-                                    {/*className="btn btn-primary">*/}
-                            {/*Add</button></th>*/}
-                    {/*</tr>*/}
                     </thead>
                     <tbody>
                         {this.renderCourseRows()}

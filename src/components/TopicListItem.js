@@ -23,11 +23,6 @@ export default class TopicListItem extends React.Component {
                         </li>
                     </div>
                 </ul>
-                {/*<button className="btn btn-danger"*/}
-                        {/*onClick={() =>*/}
-                {/*{if (window.confirm('Are you sure you wish to delete this Topic?'))*/}
-                    {/*this.props.delete(this.props.topic.id)}}>*/}
-                    {/*DELETE</button>*/}
             </div>
         )
     }

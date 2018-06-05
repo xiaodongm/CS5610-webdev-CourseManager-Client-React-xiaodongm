@@ -26,9 +26,6 @@ class CourseEditor extends React.Component {
     render() {
         return (
             <div>
-                {/*<nav className="navbar navbar-expand navbar-dark sticky-top" style={{background:'#1b3f4a'}}>*/}
-                {/*<h3 style={{color:'#ffffff', marginLeft:'60px'}}>Editing Course : {this.state.courseId}</h3>*/}
-                {/*</nav>*/}
                 <div className="row">
                     <div className="col-4" style={{background: '#47476b'}}>
                         <ModuleList courseId={this.state.courseId}/>

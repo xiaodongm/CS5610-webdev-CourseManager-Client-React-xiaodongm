@@ -20,7 +20,6 @@ class CourseRow extends React.Component {
                             {this.props.delete(this.props.course.id)}}>
                     <i className="fa fa-times">
                     </i>
-                    {/*Delete*/}
                 </button>
                 </td>
             </tr>
