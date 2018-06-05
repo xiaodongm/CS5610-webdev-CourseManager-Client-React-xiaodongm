@@ -10,20 +10,24 @@ export default class TopicListItem extends React.Component {
 
     render() {
         return (
-            <div className="input-group-append">
+            <div className="input-group-append" style={{marginLeft:'10px'}}>
                 <ul className="nav nav-tabs">
-                    <li className="nav-item">
-                        <Link   className="nav-link active"
-                                to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.props.topicId}`}>
+                    <div className="nav-item">
+                        <li  className="nav-link active"
+                             to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}/topic/${this.props.topicId}`}>
                             {this.props.topic.title}
-                        </Link>
-                    </li>
+                            <i className="fa fa-trash" style={{marginLeft:'18px', marginRight:'-10px'}}
+                               onClick={() =>
+                               {if (window.confirm('Are you sure you wish to delete this Topic?'))
+                                   this.props.delete(this.props.topic.id)}}></i>
+                        </li>
+                    </div>
                 </ul>
-                <button className="btn btn-danger"
-                        onClick={() =>
-                {if (window.confirm('Are you sure you wish to delete this Topic?'))
-                    this.props.delete(this.props.topic.id)}}>
-                    DELETE</button>
+                {/*<button className="btn btn-danger"*/}
+                        {/*onClick={() =>*/}
+                {/*{if (window.confirm('Are you sure you wish to delete this Topic?'))*/}
+                    {/*this.props.delete(this.props.topic.id)}}>*/}
+                    {/*DELETE</button>*/}
             </div>
         )
     }

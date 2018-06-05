@@ -20,7 +20,7 @@ export default class LessonTabItem extends React.Component {
 
     render() {
         return (
-            <div className="input-group-append">
+            <div className="input-group-append" style={{marginLeft:'10px', paddingTop:'10px'}}>
                 {/*<Link to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>*/}
                     {/*{this.props.lesson.title}*/}
                 {/*</Link>*/}
@@ -36,12 +36,15 @@ export default class LessonTabItem extends React.Component {
                                 onClick={() =>{this.props.setSelectedLessonTab(this.props.lesson.id);}}
                                 to={`/course/${this.props.courseId}/module/${this.props.moduleId}/lesson/${this.props.lessonId}`}>
                                 {this.props.lesson.title}
-                    </Link></li>
+                                <i className="fa fa-trash" style={{marginLeft:'18px', marginRight:'-10px'}}
+                                   onClick={() => {if (window.confirm('Are you sure you wish to delete this Lesson?'))
+                                   this.props.delete(this.props.lesson.id)}}></i>
+                        </Link></li>
                 </ul>
-                <button className="btn btn-danger" onClick={() =>
-                {if (window.confirm('Are you sure you wish to delete this Lesson?'))
-                    this.props.delete(this.props.lesson.id)}}>
-                DELETE</button>
+                {/*<button className="btn btn-danger" onClick={() =>*/}
+                {/*{if (window.confirm('Are you sure you wish to delete this Lesson?'))*/}
+                    {/*this.props.delete(this.props.lesson.id)}}>*/}
+                {/*DELETE</button>*/}
             </div>
 
     )

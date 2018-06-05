@@ -69,7 +69,9 @@ export default class TopicList extends React.Component {
                                    delete={this.deleteTopic}/>)
         });
         return (
-            topics
+            <div className="input-group-append">
+                {topics}
+            </div>
         )
 
     }
@@ -81,11 +83,15 @@ export default class TopicList extends React.Component {
                 <div className="input-group-append" style={{marginBottom:"10px"}}>
                 <input placeholder="New Topic"
                        onChange={this.setTopicTitle}
-                       className="form-control"/>
+                       className="form-control"
+                       style={{marginLeft:'10px'}}/>
                 <button className="btn btn-success"
                         onClick={this.createTopic}>Create</button>
                 </div>
-                {this.renderTopics()}
+                <div>
+                    {this.renderTopics()}
+                </div>
+
             </div>
 
         )

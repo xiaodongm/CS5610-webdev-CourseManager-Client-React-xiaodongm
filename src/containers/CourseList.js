@@ -27,14 +27,12 @@ class CourseList extends React.Component {
         this.courseService
             .findAllCourses()
             .then((courses) => {
-                console.log(courses);
                 this.setState({courses: courses});
             })
     }
 
     renderCourseRows() {
         let courses = null;
-        // console.log(this.state)
         if(this.state) {
             courses = this.state.courses.map((course) => {
                 return <CourseRow course={course} key={course.id}

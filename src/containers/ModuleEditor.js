@@ -33,10 +33,10 @@ export default class ModuleEditor extends React.Component {
     render() {
         return (
                 <div className="container">
-                    <div style={{background: '#1b3f4a'}}>
+                    <div style={{background: '#1b3f4a', marginRight:'-30px'}}>
                         <LessonTabs courseId={this.props.match.params.courseId} moduleId={this.state.moduleId}/>
                     </div>
-                    <div className="row">
+                    <div style={{marginLeft:'-16px', marginTop:'30px'}}>
                         <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId"
                                component={LessonEditor}>
                         </Route>

@@ -2,6 +2,7 @@ import React from 'react';
 import ModuleService from '../services/ModuleService';
 import ModuleListItem from '../components/ModuleListItem';
 import CourseService from '../services/CourseService'
+import { Link } from 'react-router-dom'
 
 export default class ModuleList extends React.Component {
 
@@ -97,9 +98,11 @@ export default class ModuleList extends React.Component {
             <div>
                 <nav className="navbar navbar-expand navbar-dark sticky-top"
                      style={{background:'#1b3f4a', marginRight:'-15px'}}>
+                    <Link to={`/`}>
                     <button className="btn btn-primary" style={{margin:'8px'}}>
                         <i className="fa fa-arrow-left"></i>
                     </button>
+                    </Link>
                 <h4 style={{color:'white', marginLeft:'12px', marginBottom:'-1px'}}>{this.state.course.title}</h4>
                 </nav>
                 {this.renderModules()}

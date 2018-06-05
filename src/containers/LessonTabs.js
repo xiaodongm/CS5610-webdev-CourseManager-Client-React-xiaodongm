@@ -95,13 +95,14 @@ export default class LessonTabs extends React.Component {
     render() {
         return(
             <div>
-                <div className="input-group-append" style={{marginBottom:'10px', paddingTop:'10px'}}>
+                <div className="input-group-append" style={{marginBottom:'12px', paddingTop:'20px', marginRight:'10px'}}>
                     <input placeholder="New Lesson"
                            onChange={this.setLessonTitle}
-                           className="form-control"/>
+                           className="form-control"
+                           style={{marginLeft:'10px'}}/>
                     <button className="btn btn-success" onClick={this.createLesson}>Create New Lesson</button>
                 </div>
-                <div>
+                <div style={{background:'#47476b'}}>
                 {this.renderLessons()}
                 </div>
             </div>
