@@ -1,10 +1,10 @@
 let _singleton = Symbol();
 const TOPIC_API_URL =
-    // 'http://localhost:8080/api/course/CID/module/MID/lesson/LID/topic';
-    'https://webdev-summerfull-2018-xma.herokuapp.com/api/course/CID/module/MID/lesson/LID/topic';
+    'http://localhost:8080/api/course/CID/module/MID/lesson/LID/topic';
+    // 'https://webdev-summerfull-2018-xma.herokuapp.com/api/course/CID/module/MID/lesson/LID/topic';
 const TOPIC_ID_API_URL =
-    // 'http://localhost:8080/api/topic/TOPIC_ID';
-    'https://webdev-summerfull-2018-xma.herokuapp.com/api/topic/TOPIC_ID';
+    'http://localhost:8080/api/topic/TOPIC_ID';
+    // 'https://webdev-summerfull-2018-xma.herokuapp.com/api/topic/TOPIC_ID';
 
 
 
