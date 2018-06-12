@@ -1,4 +1,5 @@
 import React from 'react';
+import App from './WidgetList'
 
 export default class TopicEditor extends React.Component {
 
@@ -47,9 +48,10 @@ export default class TopicEditor extends React.Component {
     render() {
         return (
             <div>
-            <h1>Topic Editor</h1>
-            {this.state.lessonId}
-            {this.state.topicId}
+            {/*<h1>Topic Editor</h1>*/}
+            {/*{this.state.lessonId}*/}
+            {/*{this.state.topicId}*/}
+            <App/>
             </div>
         )
     }
