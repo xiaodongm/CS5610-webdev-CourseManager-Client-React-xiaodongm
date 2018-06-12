@@ -25,6 +25,16 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                 ))
             };
 
+
+        case constants.SAVE:
+            fetch('http://localhost:8080/api/widget/save', {
+                method: 'post',
+                body: JSON.stringify(state.widgets),
+                headers: {
+                    'content-type': 'application/json'}
+            });
+            return state;
+
         case constants.FIND_ALL_WIDGETS:
             newState = Object.assign({}, state)
             newState.widgets = action.widgets

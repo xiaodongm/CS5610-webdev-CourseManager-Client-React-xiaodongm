@@ -13,6 +13,9 @@ class WidgetList extends React.Component{
         return(
             <div>
                 <h1>WidgetList: {this.props.widgets.length}</h1>
+                <button onClick={this.props.save}>
+                    Save
+                </button>
                 <ul>
                     {this.props.widgets.map(widget =>(
                         <WidgetContainer key={widget.id}
@@ -34,6 +37,7 @@ const stateToPropertiesMapper = (state) => ({
 
 const dispatcherToPropsMapper = dispatch => ({
     addWidget: () => actions.addWidget(dispatch),
+    save: () => actions.save(dispatch),
     findAllWidgets: () => actions.findAllWidgets(dispatch)
 });
 

@@ -11,3 +11,7 @@ export const findAllWidgets = dispatch => {
             type: constants.FIND_ALL_WIDGETS,
             widgets: widgets }))
 };
+
+export const save = dispatch => (
+    dispatch({type: constants.SAVE})
+)
