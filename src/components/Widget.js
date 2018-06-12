@@ -5,7 +5,7 @@ import {DELETE_WIDGET} from "../constants/Constants"
 const Widget = ({ widget, dispatch }) => (
     <li>
         {widget.id}{widget.text}
-        <button onClick={event => (dispatch({type:DELETE_WIDGET, id:widget.id}))}>
+        <button onClick={event => (dispatch({type: DELETE_WIDGET, id: widget.id}))}>
             DELETE</button>
     </li>
 )

@@ -23,7 +23,16 @@ export const widgetReducer = (state = initialState, action) => {
                         size: '2'
                     }
                 ]
-            }
+            };
+
+        case constants.DELETE_WIDGET:
+            return {
+                widgets: state.widgets.filter(widget => (
+                    widget.id !== action.id
+                ))
+            };
+
+
         default:
             return state
     }
