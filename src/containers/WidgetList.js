@@ -11,6 +11,15 @@ class WidgetList extends React.Component{
         return(
             <div>
                 <h1>WidgetList: {this.props.widgets.length}</h1>
+                <ul>
+                    {this.props.widgets.map(widget =>(
+                        <WidgetContainer key={widget.id}
+                                        widget={widget}/>
+                    ))}
+                </ul>
+                <button onClick={this.props.addWidget}>
+                    Add Widget
+                </button>
             </div>
         )
     }

@@ -1,3 +1,5 @@
+import * as constants from "../constants/Constants"
+
 
 let initialState = {
     widgets : [
@@ -8,6 +10,22 @@ let initialState = {
 }
 
 
-export const widgetReducer = () => {
-    return initialState;
+export const widgetReducer = (state = initialState, action) => {
+    switch (action.type){
+        case constants.ADD_WIDGET:
+            alert('adding a widget')
+            return {
+                widgets: [
+                    ...state.widgets,
+                    {
+                        id: state.widgets.length + 1,
+                        text: 'New Widget',
+                        widgetType: 'Paragraph',
+                        size: '2'
+                    }
+                ]
+            }
+        default:
+            return state
+    }
 }
