@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from  'react-redux'
+import {DELETE_WIDGET} from "../constants/Constants"
 
 const Widget = ({ widget, dispatch }) => (
     <li>
