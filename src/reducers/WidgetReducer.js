@@ -26,6 +26,18 @@ export const widgetReducer = (state = {widgets: []}, action) => {
             };
 
 
+        case constants.SELECT_WIDGET_TYPE:
+            console.log(action);
+            let newState = {
+                widgets: state.widgets.filter((widget) => {
+                    if(widget.id === action.id) {
+                        widget.widgetType = action.widgetType
+                    }
+                    return true;
+                })
+            };
+            return JSON.parse(JSON.stringify(newState));
+
         case constants.SAVE:
             fetch('http://localhost:8080/api/widget/save', {
                 method: 'post',
@@ -36,8 +48,8 @@ export const widgetReducer = (state = {widgets: []}, action) => {
             return state;
 
         case constants.FIND_ALL_WIDGETS:
-            newState = Object.assign({}, state)
-            newState.widgets = action.widgets
+            newState = Object.assign({}, state);
+            newState.widgets = action.widgets;
             return newState;
 
 
