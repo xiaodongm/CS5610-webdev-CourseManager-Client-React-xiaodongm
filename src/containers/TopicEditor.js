@@ -39,7 +39,7 @@ export default class TopicEditor extends React.Component {
         this.setCourseId(newProps.match.params.courseId);
         this.setModuleId(newProps.match.params.moduleId);
         this.setLessonId(newProps.match.params.lessonId);
-        this.setTopicId(newProps.match.param.topicId);
+        this.setTopicId(newProps.match.params.topicId);
     }
 
 
@@ -51,6 +51,6 @@ export default class TopicEditor extends React.Component {
             {this.state.lessonId}
             {this.state.topicId}
             </div>
-    )
+        )
     }
 }

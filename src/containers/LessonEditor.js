@@ -44,7 +44,7 @@ export default class LessonEditor extends React.Component {
         return (
             <div>
                 <div>
-                    <TopicList lessonId={this.state.lessonId}/>
+                    <TopicList lessonId={this.state.lessonId} courseId={this.state.courseId} moduleId = {this.state.moduleId}/>
                 </div>
                 <div>
                     <Route path="/course/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId"

@@ -9,7 +9,9 @@ export default class TopicList extends React.Component {
         super(props);
         this.state = {lessonId: '',
                       topic: {title: 'New Topic'},
-                      topics: []};
+                      topics: [],
+                      courseId:'',
+                      moduleId: ''};
         this.setLessonId = this.setLessonId.bind(this);
         this.setTopicTitle = this.setTopicTitle.bind(this);
         this.createTopic = this.createTopic.bind(this);
@@ -63,9 +65,13 @@ export default class TopicList extends React.Component {
 
     renderTopics() {
         let topics = this.state.topics.map((topic) => {
+
             return (<TopicListItem lessonId={this.state.lessonId}
                                     key={topic.id}
                                     topic={topic}
+                                   courseId={this.props.courseId}
+                                   moduleId={this.props.moduleId}
+                                   topicId={topic.id}
                                    delete={this.deleteTopic}/>)
         });
         return (

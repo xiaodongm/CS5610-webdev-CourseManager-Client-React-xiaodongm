@@ -3,7 +3,7 @@ import WidgetContainer from '../components/Widget'
 
 class WidgetList extends React.Component{
     constructor(props) {
-        super(props)
+        super(props);
         this.props.findAllWidgets()
     }
 
