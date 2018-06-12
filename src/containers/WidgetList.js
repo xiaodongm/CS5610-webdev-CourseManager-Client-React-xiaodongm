@@ -1,6 +1,7 @@
 import React from 'react'
 import WidgetContainer from '../components/Widget'
 import {connect} from 'react-redux'
+import * as actions from "../actions/Actions";
 
 class WidgetList extends React.Component{
     constructor(props) {
@@ -28,8 +29,13 @@ class WidgetList extends React.Component{
 
 const stateToPropertiesMapper = (state) => ({
     widgets: state.widgets
-})
+});
 
-const App = connect(stateToPropertiesMapper)(WidgetList);
+const dispatcherToPropsMapper = dispatch => ({
+    addWidget: () => actions.addWidget(dispatch)
+});
+
+const App = connect(stateToPropertiesMapper,
+    dispatcherToPropsMapper)(WidgetList);
 
 export default App;

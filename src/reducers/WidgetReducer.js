@@ -13,7 +13,6 @@ let initialState = {
 export const widgetReducer = (state = initialState, action) => {
     switch (action.type){
         case constants.ADD_WIDGET:
-            alert('adding a widget')
             return {
                 widgets: [
                     ...state.widgets,
