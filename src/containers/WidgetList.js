@@ -6,6 +6,7 @@ import * as actions from "../actions/Actions";
 class WidgetList extends React.Component{
     constructor(props) {
         super(props);
+        this.props.findAllWidgets()
     }
 
     render(){
@@ -32,7 +33,8 @@ const stateToPropertiesMapper = (state) => ({
 });
 
 const dispatcherToPropsMapper = dispatch => ({
-    addWidget: () => actions.addWidget(dispatch)
+    addWidget: () => actions.addWidget(dispatch),
+    findAllWidgets: () => actions.findAllWidgets(dispatch)
 });
 
 const App = connect(stateToPropertiesMapper,

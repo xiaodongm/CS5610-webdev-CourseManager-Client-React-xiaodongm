@@ -1,16 +1,9 @@
 import * as constants from "../constants/Constants"
 
+export const widgetReducer = (state = {widgets: []}, action) => {
 
-let initialState = {
-    widgets : [
-        {id: 0 , text :'Widget 1'},
-        {id: 1 , text :'Widget 2'},
-        {id: 2 , text :'Widget 3'}
-    ]
-}
+    let newState;
 
-
-export const widgetReducer = (state = initialState, action) => {
     switch (action.type){
         case constants.ADD_WIDGET:
             return {
@@ -32,8 +25,13 @@ export const widgetReducer = (state = initialState, action) => {
                 ))
             };
 
+        case constants.FIND_ALL_WIDGETS:
+            newState = Object.assign({}, state)
+            newState.widgets = action.widgets
+            return newState;
+
 
         default:
-            return state
+            return state;
     }
 }
