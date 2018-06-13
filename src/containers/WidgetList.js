@@ -13,13 +13,18 @@ class WidgetList extends React.Component{
         return(
             <div>
                 <h1>WidgetList: {this.props.widgets.length}</h1>
-                <button onClick={this.props.save}>
+                <button onClick={this.props.save}
+                        hidden={this.props.previewMode}>
                     Save
+                </button>
+                <button onClick={this.props.preview}>
+                    Preview
                 </button>
                 <ul>
                     {this.props.widgets.map(widget =>(
                         <WidgetContainer key={widget.id}
-                                        widget={widget}/>
+                                         preview={this.props.previewMode}
+                                         widget={widget}/>
                     ))}
                 </ul>
                 <button onClick={this.props.addWidget}>
@@ -32,13 +37,15 @@ class WidgetList extends React.Component{
 }
 
 const stateToPropertiesMapper = (state) => ({
-    widgets: state.widgets
+    widgets: state.widgets,
+    previewMode: state.preview
 });
 
 const dispatcherToPropsMapper = dispatch => ({
     addWidget: () => actions.addWidget(dispatch),
     save: () => actions.save(dispatch),
-    findAllWidgets: () => actions.findAllWidgets(dispatch)
+    findAllWidgets: () => actions.findAllWidgets(dispatch),
+    preview: () => actions.preview(dispatch)
 });
 
 const App = connect(stateToPropertiesMapper,

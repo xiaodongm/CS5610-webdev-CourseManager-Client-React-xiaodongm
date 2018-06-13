@@ -1,6 +1,6 @@
 import * as constants from "../constants/Constants"
 
-export const widgetReducer = (state = {widgets: []}, action) => {
+export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
 
     let newState;
 
@@ -65,6 +65,12 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                     'content-type': 'application/json'}
             });
             return state;
+
+        case constants.PREVIEW:
+            return {
+                widgets: state.widgets,
+                preview: !state.preview
+            }
 
         case constants.FIND_ALL_WIDGETS:
             newState = Object.assign({}, state);
