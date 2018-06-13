@@ -14,4 +14,11 @@ export const findAllWidgets = dispatch => {
 
 export const save = dispatch => (
     dispatch({type: constants.SAVE})
-)
+);
+
+export const headingSizeChanged = (dispatch, widgetId, newSize) => (
+    dispatch({
+        type: constants.HEADING_SIZE_CHANGED,
+        id: widgetId,
+        size: newSize})
+);

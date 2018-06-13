@@ -38,6 +38,16 @@ export const widgetReducer = (state = {widgets: []}, action) => {
             };
             return JSON.parse(JSON.stringify(newState));
 
+        case constants.HEADING_SIZE_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.size = action.size
+                    }
+                    return Object.assign({}, widget)
+                })
+            };
+
         case constants.SAVE:
             fetch('http://localhost:8080/api/widget/save', {
                 method: 'post',

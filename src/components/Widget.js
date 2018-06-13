@@ -1,10 +1,34 @@
 import React from 'react'
 import {connect} from  'react-redux'
 import {DELETE_WIDGET} from "../constants/Constants"
+import * as actions from "../actions/Actions";
 
-const Heading = () => (
-    <h2>Heading</h2>
-);
+const Heading = ({widget, headingSizeChanged}) => {
+    let selectElem;
+
+    return(
+        <div>
+            <h2>Heading {widget.size}</h2>
+            <select ref={node => selectElem = node}
+                    onChange={() => headingSizeChanged(widget.id, selectElem.value)}>
+                <option value="1">Heading 1</option>
+                <option value="2">Heading 2</option>
+                <option value="3">Heading 3</option>
+            </select>
+            <h3>Preview</h3>
+            {widget.size == 1 && <h1>{widget.text}</h1>}
+            {widget.size == 2 && <h2>{widget.text}</h2>}
+            {widget.size == 3 && <h3>{widget.text}</h3>}
+        </div>
+        )
+};
+
+const dispatchToPropsMapper = dispatch => ({
+    headingSizeChanged: (widgetId, newSize) =>
+        actions.headingSizeChanged(dispatch, widgetId, newSize)
+});
+
+const HeadingContainer = connect(null, dispatchToPropsMapper)(Heading);
 
 const Paragraph = () => (
     <div>
@@ -34,6 +58,7 @@ const Widget = ({ widget, dispatch }) => {
         <li>
             {widget.id}{widget.widgetType}
             <select ref={node => selectElement = node}
+                    value={widget.widgetType}
                     onChange={event =>
                         dispatch({
                             type: 'SELECT_WIDGET_TYPE',
@@ -50,7 +75,7 @@ const Widget = ({ widget, dispatch }) => {
                 DELETE
             </button>
             <div>
-                {widget.widgetType==='Heading' && <Heading/>}
+                {widget.widgetType==='Heading' && <HeadingContainer widget={widget}/>}
                 {widget.widgetType==='Paragraph' && <Paragraph/>}
                 {widget.widgetType==='List' && <List/>}
                 {widget.widgetType==='Image' && <Image/>}
