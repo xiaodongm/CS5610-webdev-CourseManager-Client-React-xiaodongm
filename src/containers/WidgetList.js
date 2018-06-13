@@ -6,14 +6,20 @@ import * as actions from "../actions/Actions";
 class WidgetList extends React.Component{
     constructor(props) {
         super(props);
-        this.props.findAllWidgets()
+        this.props.findAllWidgetsForTopic(this.props.topicId)
+    }
+
+    componentWillReceiveProps(newProps){
+        if(this.props.topicId !== newProps.topicId){
+            this.props.findAllWidgetsForTopic(newProps.topicId);
+        }
     }
 
     render(){
         return(
             <div>
                 <h1>WidgetList: {this.props.widgets.length}</h1>
-                <button onClick={this.props.save}
+                <button onClick={() => this.props.save(this.props.topicId)}
                         hidden={this.props.previewMode}>
                     Save
                 </button>
@@ -43,8 +49,8 @@ const stateToPropertiesMapper = (state) => ({
 
 const dispatcherToPropsMapper = dispatch => ({
     addWidget: () => actions.addWidget(dispatch),
-    save: () => actions.save(dispatch),
-    findAllWidgets: () => actions.findAllWidgets(dispatch),
+    save: (topicId) => actions.save(dispatch, topicId),
+    findAllWidgetsForTopic: (topicId) => actions.findAllWidgetsForTopic(dispatch, topicId),
     preview: () => actions.preview(dispatch)
 });
 

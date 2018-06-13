@@ -12,8 +12,17 @@ export const findAllWidgets = dispatch => {
             widgets: widgets }))
 };
 
-export const save = dispatch => (
-    dispatch({type: constants.SAVE})
+export const findAllWidgetsForTopic = (dispatch, topicId) => {
+        fetch('http://localhost:8080/api/topic/topicId/widget'.replace('topicId', topicId))
+            .then(response => (response.json()))
+            .then(widgets => dispatch({
+                type: constants.FIND_ALL_WIDGETS_FOR_TOPIC,
+                widgets: widgets }))
+};
+
+export const save = (dispatch, topicId) => (
+    dispatch({type: constants.SAVE,
+              topicId: topicId})
 );
 
 export const headingSizeChanged = (dispatch, widgetId, newSize) => (

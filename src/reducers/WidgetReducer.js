@@ -2,8 +2,6 @@ import * as constants from "../constants/Constants"
 
 export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
 
-    let newState;
-
     switch (action.type){
         case constants.ADD_WIDGET:
             return {
@@ -58,7 +56,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             };
 
         case constants.SAVE:
-            fetch('http://localhost:8080/api/widget/save', {
+            fetch('http://localhost:8080/api/topic/topicId/widget'.replace('topicId', action.topicId), {
                 method: 'post',
                 body: JSON.stringify(state.widgets),
                 headers: {
@@ -73,6 +71,11 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             }
 
         case constants.FIND_ALL_WIDGETS:
+            newState = Object.assign({}, state);
+            newState.widgets = action.widgets;
+            return newState;
+
+        case constants.FIND_ALL_WIDGETS_FOR_TOPIC:
             newState = Object.assign({}, state);
             newState.widgets = action.widgets;
             return newState;

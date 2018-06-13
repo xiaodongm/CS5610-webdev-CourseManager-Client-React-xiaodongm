@@ -51,7 +51,7 @@ export default class TopicEditor extends React.Component {
             {/*<h1>Topic Editor</h1>*/}
             {/*{this.state.lessonId}*/}
             {/*{this.state.topicId}*/}
-            <App/>
+            <App topicId={this.props.match.params.topicId}/>
             </div>
         )
     }
