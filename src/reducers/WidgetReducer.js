@@ -27,7 +27,6 @@ export const widgetReducer = (state = {widgets: []}, action) => {
 
 
         case constants.SELECT_WIDGET_TYPE:
-            console.log(action);
             let newState = {
                 widgets: state.widgets.filter((widget) => {
                     if(widget.id === action.id) {
@@ -43,6 +42,16 @@ export const widgetReducer = (state = {widgets: []}, action) => {
                 widgets: state.widgets.map(widget => {
                     if(widget.id === action.id) {
                         widget.size = action.size
+                    }
+                    return Object.assign({}, widget)
+                })
+            };
+
+        case constants.HEADING_TEXT_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.text = action.text
                     }
                     return Object.assign({}, widget)
                 })

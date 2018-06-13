@@ -3,13 +3,17 @@ import {connect} from  'react-redux'
 import {DELETE_WIDGET} from "../constants/Constants"
 import * as actions from "../actions/Actions";
 
-const Heading = ({widget, headingSizeChanged}) => {
+const Heading = ({widget, headingSizeChanged, headingTextChanged}) => {
     let selectElem;
-
+    let inputElem;
     return(
         <div>
             <h2>Heading {widget.size}</h2>
+            <input onChange={() => headingTextChanged(widget.id, inputElem.value)}
+                   value={widget.text}
+                   ref={node => inputElem = node}/>
             <select ref={node => selectElem = node}
+                    value={widget.size}
                     onChange={() => headingSizeChanged(widget.id, selectElem.value)}>
                 <option value="1">Heading 1</option>
                 <option value="2">Heading 2</option>
@@ -24,6 +28,8 @@ const Heading = ({widget, headingSizeChanged}) => {
 };
 
 const dispatchToPropsMapper = dispatch => ({
+    headingTextChanged: (widgetId, newText) =>
+        actions.headingTextChanged(dispatch, widgetId, newText),
     headingSizeChanged: (widgetId, newSize) =>
         actions.headingSizeChanged(dispatch, widgetId, newSize)
 });
