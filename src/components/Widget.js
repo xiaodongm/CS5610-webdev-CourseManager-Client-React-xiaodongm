@@ -9,7 +9,6 @@ const Heading = ({widget, preview, headingSizeChanged, headingTextChanged}) => {
     return(
         <div>
             <div hidden={preview}>
-                {/*<h2>Heading {widget.size}</h2>*/}
                 <input onChange={() => headingTextChanged(widget.id, inputElem.value)}
                        value={widget.text}
                        placeholder='Heading Text'
@@ -39,7 +38,9 @@ const dispatchToPropsMapper = dispatch => ({
     headingTextChanged: (widgetId, newText) =>
         actions.headingTextChanged(dispatch, widgetId, newText),
     headingSizeChanged: (widgetId, newSize) =>
-        actions.headingSizeChanged(dispatch, widgetId, newSize)
+        actions.headingSizeChanged(dispatch, widgetId, newSize),
+    paragraphTextChanged: (widgetId, newText) =>
+        actions.paragraphTextChanged(dispatch, widgetId, newText)
 });
 
 const stateToPropsMapper = state => ({
@@ -48,12 +49,26 @@ const stateToPropsMapper = state => ({
 
 const HeadingContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Heading);
 
-const Paragraph = () => (
-    <div>
-        <h2>Paragraph</h2>
-        <textarea></textarea>
-    </div>
-);
+const Paragraph = ({widget, preview, paragraphTextChanged}) => {
+    let inputElem;
+    return(
+        <div>
+            <div hidden={preview}>
+            <textarea className='form-control'
+                      style={{marginTop:'5px'}}
+                      onChange={() => paragraphTextChanged(widget.id, inputElem.value)}
+                      value={widget.text}
+                      ref={node => inputElem = node}>
+            </textarea>
+            <input className='form-control' placeholder='WidgetName' style={{marginTop:'15px', marginBottom:'5px'}}/>
+            <h4>Preview</h4>
+            </div>
+            <h5>{widget.text}</h5>
+        </div>
+    );
+};
+
+const ParagraphContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Paragraph);
 
 const Image = () => (
     <h2>Image</h2>
@@ -109,7 +124,7 @@ const Widget = ({ widget, preview, dispatch }) => {
             </div>
             <div>
                 {widget.widgetType==='Heading' && <HeadingContainer widget={widget}/>}
-                {widget.widgetType==='Paragraph' && <Paragraph/>}
+                {widget.widgetType==='Paragraph' && <ParagraphContainer widget={widget}/>}
                 {widget.widgetType==='List' && <List/>}
                 {widget.widgetType==='Image' && <Image/>}
                 {widget.widgetType==='Link' && <Link/>}
