@@ -12,6 +12,7 @@ const Heading = ({widget, preview, headingSizeChanged, headingTextChanged}) => {
                 {/*<h2>Heading {widget.size}</h2>*/}
                 <input onChange={() => headingTextChanged(widget.id, inputElem.value)}
                        value={widget.text}
+                       placeholder='Heading Text'
                        className='form-control'
                        style={{marginBottom:'10px', marginTop:'15px'}}
                        ref={node => inputElem = node}/>
