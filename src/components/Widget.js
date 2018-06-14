@@ -55,6 +55,7 @@ const Paragraph = ({widget, preview, paragraphTextChanged}) => {
         <div>
             <div hidden={preview}>
             <textarea className='form-control'
+                      placeholder='Paragraph Text'
                       style={{marginTop:'5px'}}
                       onChange={() => paragraphTextChanged(widget.id, inputElem.value)}
                       value={widget.text}
