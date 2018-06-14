@@ -94,11 +94,11 @@ const Widget = ({ widget, preview, dispatch }) => {
                                     id: widget.id,
                                     widgetType: selectElement.value
                                 })}>
-                        <option>Heading Widget</option>
-                        <option>Paragraph Widget</option>
-                        <option>List Widget</option>
-                        <option>Image Widget</option>
-                        <option>Link Widget</option>
+                        <option>Heading</option>
+                        <option>Paragraph</option>
+                        <option>List</option>
+                        <option>Image</option>
+                        <option>Link</option>
                     </select>
                     <button onClick={event => (dispatch({type: DELETE_WIDGET, id: widget.id}))}
                             className='btn btn-danger'>
@@ -107,11 +107,11 @@ const Widget = ({ widget, preview, dispatch }) => {
                 </div>
             </div>
             <div>
-                {widget.widgetType==='Heading Widget' && <HeadingContainer widget={widget}/>}
-                {widget.widgetType==='Paragraph Widget' && <Paragraph/>}
-                {widget.widgetType==='List Widget' && <List/>}
-                {widget.widgetType==='Image Widget' && <Image/>}
-                {widget.widgetType==='Link Widget' && <Link/>}
+                {widget.widgetType==='Heading' && <HeadingContainer widget={widget}/>}
+                {widget.widgetType==='Paragraph' && <Paragraph/>}
+                {widget.widgetType==='List' && <List/>}
+                {widget.widgetType==='Image' && <Image/>}
+                {widget.widgetType==='Link' && <Link/>}
             </div>
         </div>
     )
