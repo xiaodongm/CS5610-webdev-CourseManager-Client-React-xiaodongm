@@ -40,7 +40,9 @@ const dispatchToPropsMapper = dispatch => ({
     headingSizeChanged: (widgetId, newSize) =>
         actions.headingSizeChanged(dispatch, widgetId, newSize),
     paragraphTextChanged: (widgetId, newText) =>
-        actions.paragraphTextChanged(dispatch, widgetId, newText)
+        actions.paragraphTextChanged(dispatch, widgetId, newText),
+    ImageTextChanged: (widgetId, newText) =>
+        actions.ImageTextChanged(dispatch, widgetId, newText)
 });
 
 const stateToPropsMapper = state => ({
@@ -71,9 +73,28 @@ const Paragraph = ({widget, preview, paragraphTextChanged}) => {
 
 const ParagraphContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Paragraph);
 
-const Image = () => (
-    <h2>Image</h2>
-);
+const Image = ({widget, preview, ImageTextChanged}) => {
+    let inputElem;
+    return(
+        <div>
+            <div hidden={preview}>
+                <input className='form-control'
+                       ref={node => inputElem = node}
+                       onChange={() => ImageTextChanged(widget.id, inputElem.value)}
+                       style={{marginTop:'5px'}}
+                       value={widget.text}
+                        placeholder='Image URL'/>
+                <input className='form-control'
+                       placeholder='WidgetName'
+                       style={{marginTop:'15px', marginBottom:'5px'}}/>
+                <h4>Preview</h4>
+            </div>
+            <img src={widget.text}></img>
+        </div>
+    )
+};
+
+const ImageContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Image);
 
 const List = () => (
     <h2>List</h2>
@@ -127,7 +148,7 @@ const Widget = ({ widget, preview, dispatch }) => {
                 {widget.widgetType==='Heading' && <HeadingContainer widget={widget}/>}
                 {widget.widgetType==='Paragraph' && <ParagraphContainer widget={widget}/>}
                 {widget.widgetType==='List' && <List/>}
-                {widget.widgetType==='Image' && <Image/>}
+                {widget.widgetType==='Image' && <ImageContainer widget={widget}/>}
                 {widget.widgetType==='Link' && <Link/>}
             </div>
         </div>

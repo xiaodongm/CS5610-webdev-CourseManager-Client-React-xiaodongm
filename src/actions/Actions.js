@@ -49,3 +49,10 @@ export const paragraphTextChanged = (dispatch, widgetId, newText) => (
         id: widgetId,
         text: newText})
 );
+
+export const ImageTextChanged = (dispatch, widgetId, newText) => (
+    dispatch({
+        type: constants.IMAGE_TEXT_CHANGED,
+        id: widgetId,
+        text: newText})
+);

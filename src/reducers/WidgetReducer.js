@@ -65,6 +65,16 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 })
             };
 
+        case constants.IMAGE_TEXT_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.text = action.text
+                    }
+                    return Object.assign({}, widget)
+                })
+            };
+
         case constants.SAVE:
             fetch('http://localhost:8080/api/topic/topicId/widget'.replace('topicId', action.topicId), {
                 method: 'post',
