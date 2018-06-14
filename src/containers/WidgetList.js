@@ -17,26 +17,39 @@ class WidgetList extends React.Component{
 
     render(){
         return(
-            <div>
-                <h1>WidgetList: {this.props.widgets.length}</h1>
-                <button onClick={() => this.props.save(this.props.topicId)}
-                        hidden={this.props.previewMode}>
-                    Save
-                </button>
-                <button onClick={this.props.preview}>
-                    Preview
-                </button>
-                <ul>
+            <form style={{marginLeft:'40px'}}>
+                <div style={{marginTop:'15px', paddingLeft:'700px'}}
+                     className='form-group row'>
+                    <button onClick={() => this.props.save(this.props.topicId)}
+                            hidden={this.props.previewMode}
+                            className='btn btn-success'
+                            type='button'
+                            style={{marginRight:'3px'}}>
+                        Save
+                    </button>
+                    <button onClick={this.props.preview}
+                            className='btn badge-warning'
+                            type='button'>
+                        Preview
+                    </button>
+                </div>
+                <div className='form-group row'
+                     style={{marginTop:'-14px'}}>
+                    {/*<h3>WidgetList: {this.props.widgets.length}</h3>*/}
+                </div>
+                <div style={{marginLeft:'-12px'}}>
                     {this.props.widgets.map(widget =>(
                         <WidgetContainer key={widget.id}
                                          preview={this.props.previewMode}
                                          widget={widget}/>
                     ))}
-                </ul>
-                <button onClick={this.props.addWidget}>
-                    Add Widget
+                </div>
+                <button onClick={this.props.addWidget}
+                        className='btn btn-danger float-right'
+                type='button'>
+                    <i className='fa fa-plus'></i>
                 </button>
-            </div>
+            </form>
         )
     }
 
