@@ -3,6 +3,25 @@ import {connect} from  'react-redux'
 import {DELETE_WIDGET} from "../constants/Constants"
 import * as actions from "../actions/Actions";
 
+const dispatchToPropsMapper = dispatch => ({
+    headingTextChanged: (widgetId, newText) =>
+        actions.headingTextChanged(dispatch, widgetId, newText),
+    headingSizeChanged: (widgetId, newSize) =>
+        actions.headingSizeChanged(dispatch, widgetId, newSize),
+    paragraphTextChanged: (widgetId, newText) =>
+        actions.paragraphTextChanged(dispatch, widgetId, newText),
+    ImageSrcChanged: (widgetId, newSrc) =>
+        actions.ImageSrcChanged(dispatch, widgetId, newSrc),
+    LinkHrefChanged: (widgetId, newHref) =>
+        actions.LinkHrefChanged(dispatch, widgetId, newHref),
+    LinkTextChanged: (widgetId, newText) =>
+        actions.LinkTextChanged(dispatch, widgetId, newText),
+    ListTextChanged: (widgetId, newText) =>
+        actions.ListTextChanged(dispatch, widgetId, newText),
+    ListTypeChanged: (widgetId, newType) =>
+        actions.ListTypeChanged(dispatch, widgetId, newType)
+});
+
 const Heading = ({widget, preview, headingSizeChanged, headingTextChanged}) => {
     let selectElem;
     let inputElem;
@@ -34,20 +53,6 @@ const Heading = ({widget, preview, headingSizeChanged, headingTextChanged}) => {
         )
 };
 
-const dispatchToPropsMapper = dispatch => ({
-    headingTextChanged: (widgetId, newText) =>
-        actions.headingTextChanged(dispatch, widgetId, newText),
-    headingSizeChanged: (widgetId, newSize) =>
-        actions.headingSizeChanged(dispatch, widgetId, newSize),
-    paragraphTextChanged: (widgetId, newText) =>
-        actions.paragraphTextChanged(dispatch, widgetId, newText),
-    ImageSrcChanged: (widgetId, newSrc) =>
-        actions.ImageSrcChanged(dispatch, widgetId, newSrc),
-    LinkHrefChanged: (widgetId, newHref) =>
-        actions.LinkHrefChanged(dispatch, widgetId, newHref),
-    LinkTextChanged: (widgetId, newText) =>
-        actions.LinkTextChanged(dispatch, widgetId, newText)
-});
 
 const stateToPropsMapper = state => ({
     preview: state.preview
@@ -93,16 +98,64 @@ const Image = ({widget, preview, ImageSrcChanged}) => {
                        style={{marginTop:'15px', marginBottom:'5px'}}/>
                 <h4>Preview</h4>
             </div>
-            <img src={widget.src}></img>
+            <img src={widget.src} alt='widgetImage'></img>
         </div>
     )
 };
 
 const ImageContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Image);
 
-const List = () => (
-    <h2>List</h2>
-);
+const List = ({widget, preview, ListTextChanged, ListTypeChanged}) => {
+    let inputElem;
+    let selectElem;
+    let key = 0;
+    return(
+        <div>
+            <div hidden={preview}>
+                <textarea className='form-control'
+                          ref={node => inputElem = node}
+                          onChange={() => ListTextChanged(widget.id, inputElem.value)}
+                          value={widget.text}
+                          placeholder='Enter one list item per line'
+                          style={{marginTop:'5px'}}>
+                </textarea>
+                <select className='form-control'
+                        style={{marginTop:'15px'}}
+                        ref={node => selectElem = node}
+                        value={widget.listType}
+                        onChange={() => ListTypeChanged(widget.id, selectElem.value)}>
+                    <option value='Unordered'>Unordered list</option>
+                    <option value='Ordered'>Ordered list</option>
+                </select>
+                <input className='form-control'
+                       placeholder='WidgetName'
+                       style={{marginTop:'15px', marginBottom:'10px'}}/>
+                <h4>Preview</h4>
+            </div>
+            <div>
+                <ul>
+                {widget.listType === 'Unordered' && widget.text.split('\n').map(listItem =>(
+                        <li key={++key}>
+                            {listItem}
+                        </li>
+
+                ))}
+                </ul>
+                <ol>
+                {widget.listType === 'Ordered' && widget.text.split('\n').map(listItem =>(
+
+                        <li key={++key}>
+                            {listItem}
+                        </li>
+                ))}
+                </ol>
+            </div>
+        </div>
+    )
+};
+
+
+const ListContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(List);
 
 const Link = ({widget, preview, LinkHrefChanged, LinkTextChanged}) => {
     let inputElem;
@@ -177,7 +230,7 @@ const Widget = ({ widget, preview, dispatch }) => {
             <div>
                 {widget.widgetType==='Heading' && <HeadingContainer widget={widget}/>}
                 {widget.widgetType==='Paragraph' && <ParagraphContainer widget={widget}/>}
-                {widget.widgetType==='List' && <List/>}
+                {widget.widgetType==='List' && <ListContainer widget={widget}/>}
                 {widget.widgetType==='Image' && <ImageContainer widget={widget}/>}
                 {widget.widgetType==='Link' && <LinkContainer widget={widget}/>}
             </div>
