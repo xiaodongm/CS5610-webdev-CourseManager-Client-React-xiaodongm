@@ -41,8 +41,8 @@ const dispatchToPropsMapper = dispatch => ({
         actions.headingSizeChanged(dispatch, widgetId, newSize),
     paragraphTextChanged: (widgetId, newText) =>
         actions.paragraphTextChanged(dispatch, widgetId, newText),
-    ImageTextChanged: (widgetId, newText) =>
-        actions.ImageTextChanged(dispatch, widgetId, newText)
+    ImageSrcChanged: (widgetId, newSrc) =>
+        actions.ImageSrcChanged(dispatch, widgetId, newSrc)
 });
 
 const stateToPropsMapper = state => ({
@@ -73,23 +73,23 @@ const Paragraph = ({widget, preview, paragraphTextChanged}) => {
 
 const ParagraphContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Paragraph);
 
-const Image = ({widget, preview, ImageTextChanged}) => {
+const Image = ({widget, preview, ImageSrcChanged}) => {
     let inputElem;
     return(
         <div>
             <div hidden={preview}>
                 <input className='form-control'
                        ref={node => inputElem = node}
-                       onChange={() => ImageTextChanged(widget.id, inputElem.value)}
+                       onChange={() => ImageSrcChanged(widget.id, inputElem.value)}
                        style={{marginTop:'5px'}}
-                       value={widget.text}
+                       value={widget.src}
                         placeholder='Image URL'/>
                 <input className='form-control'
                        placeholder='WidgetName'
                        style={{marginTop:'15px', marginBottom:'5px'}}/>
                 <h4>Preview</h4>
             </div>
-            <img src={widget.text}></img>
+            <img src={widget.src}></img>
         </div>
     )
 };
@@ -100,9 +100,29 @@ const List = () => (
     <h2>List</h2>
 );
 
-const Link = () => (
-    <h2>Link</h2>
-);
+const Link = ({widget, preview}) => {
+    let inputElem;
+    return(
+        <div>
+            <div hidden={preview}>
+                <input className='form-control'
+                       placeholder='Link URL'
+                       style={{marginTop:'5px'}}/>
+                <input className='form-control'
+                       placeholder='Link Text'
+                       style={{marginTop:'15px'}}/>
+                <input className='form-control'
+                       placeholder='WidgetName'
+                       style={{marginTop:'15px', marginBottom:'5px'}}/>
+                <h4>Preview</h4>
+            </div>
+            <a>abc</a>
+        </div>
+    )
+
+};
+
+const LinkContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Link);
 
 
 const Widget = ({ widget, preview, dispatch }) => {
@@ -149,7 +169,7 @@ const Widget = ({ widget, preview, dispatch }) => {
                 {widget.widgetType==='Paragraph' && <ParagraphContainer widget={widget}/>}
                 {widget.widgetType==='List' && <List/>}
                 {widget.widgetType==='Image' && <ImageContainer widget={widget}/>}
-                {widget.widgetType==='Link' && <Link/>}
+                {widget.widgetType==='Link' && <LinkContainer widget={widget}/>}
             </div>
         </div>
     )
@@ -158,6 +178,6 @@ const Widget = ({ widget, preview, dispatch }) => {
 
 const WidgetContainer = connect(state => ({
     preview: state.preview
-}))(Widget)
+}))(Widget);
 
 export default WidgetContainer;

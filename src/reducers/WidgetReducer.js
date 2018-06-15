@@ -11,7 +11,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         id: state.widgets.length + 1,
                         text: '',
                         widgetType: 'Heading',
-                        size: '1'
+                        size: '1',
+                        src: ''
                     }
                 ]
             };
@@ -65,15 +66,16 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 })
             };
 
-        case constants.IMAGE_TEXT_CHANGED:
+        case constants.IMAGE_SRC_CHANGED:
             return {
                 widgets: state.widgets.map(widget => {
                     if(widget.id === action.id) {
-                        widget.text = action.text
+                        widget.src = action.src
                     }
                     return Object.assign({}, widget)
                 })
             };
+
 
         case constants.SAVE:
             fetch('http://localhost:8080/api/topic/topicId/widget'.replace('topicId', action.topicId), {
