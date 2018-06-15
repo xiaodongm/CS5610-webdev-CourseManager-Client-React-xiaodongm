@@ -57,3 +57,17 @@ export const ImageSrcChanged = (dispatch, widgetId, newSrc) => (
         src: newSrc})
 );
 
+export const LinkHrefChanged = (dispatch, widgetId, newHref) => (
+    dispatch({
+        type: constants.LINK_HREF_CHANGED,
+        id: widgetId,
+        href: newHref})
+);
+
+export const LinkTextChanged = (dispatch, widgetId, newText) => (
+    dispatch({
+        type: constants.LINK_TEXT_CHANGED,
+        id: widgetId,
+        text: newText})
+);
+

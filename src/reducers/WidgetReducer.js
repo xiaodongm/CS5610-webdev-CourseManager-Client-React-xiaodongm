@@ -12,7 +12,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         text: '',
                         widgetType: 'Heading',
                         size: '1',
-                        src: ''
+                        src: '',
+                        href: ''
                     }
                 ]
             };
@@ -76,6 +77,25 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 })
             };
 
+        case constants.LINK_HREF_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.href = action.href
+                    }
+                    return Object.assign({}, widget)
+                })
+            };
+
+        case constants.LINK_TEXT_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.text = action.text
+                    }
+                    return Object.assign({}, widget)
+                })
+            };
 
         case constants.SAVE:
             fetch('http://localhost:8080/api/topic/topicId/widget'.replace('topicId', action.topicId), {

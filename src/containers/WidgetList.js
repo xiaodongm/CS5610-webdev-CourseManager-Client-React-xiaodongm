@@ -18,20 +18,22 @@ class WidgetList extends React.Component{
     render(){
         return(
             <form style={{marginLeft:'40px'}}>
-                <div style={{marginTop:'15px', paddingLeft:'700px'}}
+                <div style={{marginTop:'15px'}}
                      className='form-group row'>
-                    <button onClick={() => this.props.save(this.props.topicId)}
-                            hidden={this.props.previewMode}
-                            className='btn btn-success'
-                            type='button'
-                            style={{marginRight:'3px'}}>
-                        Save
-                    </button>
-                    <button onClick={this.props.preview}
-                            className='btn badge-warning'
-                            type='button'>
-                        Preview
-                    </button>
+                    <div className='col-12'>
+                        <button onClick={this.props.preview}
+                                className='btn badge-warning float-right'
+                                type='button'>
+                            Preview
+                        </button>
+                        <button onClick={() => this.props.save(this.props.topicId)}
+                                hidden={this.props.previewMode}
+                                className='btn btn-success float-right'
+                                type='button'
+                                style={{marginRight:'3px'}}>
+                            Save
+                        </button>
+                    </div>
                 </div>
                 <div className='form-group row'
                      style={{marginTop:'-14px'}}>

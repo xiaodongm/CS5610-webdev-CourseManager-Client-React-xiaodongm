@@ -42,7 +42,11 @@ const dispatchToPropsMapper = dispatch => ({
     paragraphTextChanged: (widgetId, newText) =>
         actions.paragraphTextChanged(dispatch, widgetId, newText),
     ImageSrcChanged: (widgetId, newSrc) =>
-        actions.ImageSrcChanged(dispatch, widgetId, newSrc)
+        actions.ImageSrcChanged(dispatch, widgetId, newSrc),
+    LinkHrefChanged: (widgetId, newHref) =>
+        actions.LinkHrefChanged(dispatch, widgetId, newHref),
+    LinkTextChanged: (widgetId, newText) =>
+        actions.LinkTextChanged(dispatch, widgetId, newText)
 });
 
 const stateToPropsMapper = state => ({
@@ -100,15 +104,21 @@ const List = () => (
     <h2>List</h2>
 );
 
-const Link = ({widget, preview}) => {
+const Link = ({widget, preview, LinkHrefChanged, LinkTextChanged}) => {
     let inputElem;
     return(
         <div>
             <div hidden={preview}>
                 <input className='form-control'
+                       ref={node => inputElem = node}
+                       onChange={() => LinkHrefChanged(widget.id, inputElem.value)}
+                       value={widget.href}
                        placeholder='Link URL'
                        style={{marginTop:'5px'}}/>
                 <input className='form-control'
+                       ref={node => inputElem = node}
+                       onChange={() => LinkTextChanged(widget.id, inputElem.value)}
+                       value={widget.text}
                        placeholder='Link Text'
                        style={{marginTop:'15px'}}/>
                 <input className='form-control'
@@ -116,7 +126,7 @@ const Link = ({widget, preview}) => {
                        style={{marginTop:'15px', marginBottom:'5px'}}/>
                 <h4>Preview</h4>
             </div>
-            <a>abc</a>
+            <a href={widget.href}>{widget.text}</a>
         </div>
     )
 
