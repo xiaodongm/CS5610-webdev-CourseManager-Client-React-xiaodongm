@@ -84,3 +84,11 @@ export const ListTypeChanged = (dispatch, widgetId, newType) => (
         id: widgetId,
         listType: newType})
 );
+
+export const widgetNameChanged = (dispatch, widgetId, newName) => (
+    dispatch({
+        type: constants.WIDGET_NAME_CHANGED,
+        id: widgetId,
+        name: newName})
+);
+

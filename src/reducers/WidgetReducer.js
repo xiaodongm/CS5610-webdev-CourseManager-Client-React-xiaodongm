@@ -32,7 +32,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         src: '',
                         href: '',
                         listType:'Unordered',
-                        widgetOrder:state.widgets.length
+                        widgetOrder:state.widgets.length,
+                        name: ''
                     }
                 ],
                 preview: state.preview
@@ -40,9 +41,9 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
 
         case constants.DELETE_WIDGET:
             return {
-                widgets: state.widgets.filter(widget => (
+                widgets: resetWidgetOrder(state.widgets.filter(widget => (
                     widget.id !== action.id
-                )),
+                ))),
                 preview: state.preview
             };
 
@@ -57,6 +58,17 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 })
             };
             return JSON.parse(JSON.stringify(newState));
+
+        case constants.WIDGET_NAME_CHANGED:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.name = action.name
+                    }
+                    return Object.assign({}, widget)
+                }),
+                preview: state.preview
+            };
 
         case constants.HEADING_SIZE_CHANGED:
             return {
@@ -201,4 +213,4 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
         default:
             return state;
     }
-}
+};
