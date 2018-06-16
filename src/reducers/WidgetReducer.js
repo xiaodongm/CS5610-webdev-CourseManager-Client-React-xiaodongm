@@ -55,7 +55,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         widget.widgetType = action.widgetType
                     }
                     return true;
-                })
+                }),
+                preview: state.preview
             };
             return JSON.parse(JSON.stringify(newState));
 
@@ -166,7 +167,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 return state;
             }else{
                 newState = {
-                    widgets: resetWidgetOrder(switchIndex(index, index - 1, state.widgets))
+                    widgets: resetWidgetOrder(switchIndex(index, index - 1, state.widgets)),
+                    preview: state.preview
                 };
                 return JSON.parse(JSON.stringify(newState));
             }
@@ -178,7 +180,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 return state;
             }else{
                 newState = {
-                    widgets:resetWidgetOrder(switchIndex(index, index + 1, state.widgets))
+                    widgets:resetWidgetOrder(switchIndex(index, index + 1, state.widgets)),
+                    preview: state.preview
                 };
                 return JSON.parse(JSON.stringify(newState));
             }
@@ -202,11 +205,13 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
         case constants.FIND_ALL_WIDGETS:
             newState = Object.assign({}, state);
             newState.widgets = action.widgets;
+            newState.preview = state.preview;
             return newState;
 
         case constants.FIND_ALL_WIDGETS_FOR_TOPIC:
             newState = Object.assign({}, state);
             newState.widgets = action.widgets;
+            newState.preview = state.preview;
             return newState;
 
 

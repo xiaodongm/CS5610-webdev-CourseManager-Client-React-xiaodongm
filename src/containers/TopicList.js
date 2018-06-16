@@ -11,12 +11,14 @@ export default class TopicList extends React.Component {
                       topic: {title: 'New Topic'},
                       topics: [],
                       courseId:'',
-                      moduleId: ''};
+                      moduleId: '',
+                      selectedTopicTab: ''};
         this.setLessonId = this.setLessonId.bind(this);
         this.setTopicTitle = this.setTopicTitle.bind(this);
         this.createTopic = this.createTopic.bind(this);
         this.topicService = TopicService.instance;
         this.deleteTopic = this.deleteTopic.bind(this);
+        this.setSelectedTopicTab = this.setSelectedTopicTab.bind(this);
 
     }
     setLessonId(lessonId) {
@@ -25,6 +27,10 @@ export default class TopicList extends React.Component {
 
     setTopicTitle(event) {
         this.setState({topic: {title: event.target.value}})
+    }
+
+    setSelectedTopicTab(selectedTopicTab){
+        this.setState({selectedTopicTab: selectedTopicTab});
     }
 
     createTopic() {
@@ -72,7 +78,9 @@ export default class TopicList extends React.Component {
                                    courseId={this.props.courseId}
                                    moduleId={this.props.moduleId}
                                    topicId={topic.id}
-                                   delete={this.deleteTopic}/>)
+                                   delete={this.deleteTopic}
+                                   selectedTopicTab={this.state.selectedTopicTab}
+                                   setSelectedTopicTab={this.setSelectedTopicTab}/>)
         });
         return (
             <div className="input-group-append">

@@ -31,16 +31,16 @@ const stateToPropsMapper = state => ({
 const Heading = ({widget, preview, headingSizeChanged, headingTextChanged, widgetNameChanged}) => {
     let selectElem, inputElem, nameElem;
     return(
-        <div>
+        <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
                 <input onChange={() => headingTextChanged(widget.id, inputElem.value)}
-                       value={widget.text}
+                       value={widget.text === null? '' : widget.text}
                        placeholder='Heading Text'
                        className='form-control'
                        style={{marginBottom:'10px', marginTop:'15px'}}
                        ref={node => inputElem = node}/>
                 <select ref={node => selectElem = node}
-                        value={widget.size}
+                        value={widget.size === null? '1' : widget.size}
                         style={{marginBottom:'10px'}}
                         className='form-control'
                         onChange={() => headingSizeChanged(widget.id, selectElem.value)}>
@@ -53,7 +53,7 @@ const Heading = ({widget, preview, headingSizeChanged, headingTextChanged, widge
                        style={{marginBottom:'10px'}}
                        onChange={() => widgetNameChanged(widget.id, nameElem.value)}
                        ref={node => nameElem = node}
-                       value={widget.name}/>
+                       value={widget.name === null? '' : widget.name}/>
             <h4>Preview</h4>
             </div>
             {widget.size == 1 && <h1>{widget.text}</h1>}
@@ -70,24 +70,24 @@ const HeadingContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Head
 const Paragraph = ({widget, preview, paragraphTextChanged, widgetNameChanged}) => {
     let inputElem, nameElem;
     return(
-        <div>
+        <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
             <textarea className='form-control'
                       placeholder='Paragraph Text'
                       style={{marginTop:'5px'}}
                       onChange={() => paragraphTextChanged(widget.id, inputElem.value)}
-                      value={widget.text}
+                      value={widget.text === null? '' : widget.text}
                       ref={node => inputElem = node}>
             </textarea>
             <input className='form-control'
                    placeholder='WidgetName'
                    onChange={() => widgetNameChanged(widget.id, nameElem.value)}
                    ref={node => nameElem = node}
-                   value={widget.name}
+                   value={widget.name === null? '' : widget.name}
                    style={{marginTop:'15px', marginBottom:'5px'}}/>
             <h4>Preview</h4>
             </div>
-            <h5>{widget.text}</h5>
+            <p>{widget.text}</p>
         </div>
     );
 };
@@ -97,19 +97,19 @@ const ParagraphContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Pa
 const Image = ({widget, preview, ImageSrcChanged, widgetNameChanged}) => {
     let inputElem, nameElem;
     return(
-        <div>
+        <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
                 <input className='form-control'
                        ref={node => inputElem = node}
                        onChange={() => ImageSrcChanged(widget.id, inputElem.value)}
                        style={{marginTop:'5px'}}
-                       value={widget.src}
+                       value={widget.src === null? '' : widget.src}
                         placeholder='Image URL'/>
                 <input className='form-control'
                        placeholder='WidgetName'
                        onChange={() => widgetNameChanged(widget.id, nameElem.value)}
                        ref={node => nameElem = node}
-                       value={widget.name}
+                       value={widget.name === null? '' : widget.name}
                        style={{marginTop:'15px', marginBottom:'5px'}}/>
                 <h4>Preview</h4>
             </div>
@@ -124,19 +124,19 @@ const List = ({widget, preview, ListTextChanged, ListTypeChanged, widgetNameChan
     let inputElem, selectElem, nameElem;
     let key = 0;
     return(
-        <div>
+        <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
                 <textarea className='form-control'
                           ref={node => inputElem = node}
                           onChange={() => ListTextChanged(widget.id, inputElem.value)}
-                          value={widget.text}
+                          value={widget.text === null? '' : widget.text}
                           placeholder='Enter one list item per line'
                           style={{marginTop:'5px'}}>
                 </textarea>
                 <select className='form-control'
                         style={{marginTop:'15px'}}
                         ref={node => selectElem = node}
-                        value={widget.listType}
+                        value={widget.listType === null? 'Unordered' : widget.listType}
                         onChange={() => ListTypeChanged(widget.id, selectElem.value)}>
                     <option value='Unordered'>Unordered list</option>
                     <option value='Ordered'>Ordered list</option>
@@ -145,7 +145,7 @@ const List = ({widget, preview, ListTextChanged, ListTypeChanged, widgetNameChan
                        placeholder='WidgetName'
                        onChange={() => widgetNameChanged(widget.id, nameElem.value)}
                        ref={node => nameElem = node}
-                       value={widget.name}
+                       value={widget.name === null? '' : widget.name}
                        style={{marginTop:'15px', marginBottom:'10px'}}/>
                 <h4>Preview</h4>
             </div>
@@ -177,25 +177,25 @@ const ListContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(List);
 const Link = ({widget, preview, LinkHrefChanged, LinkTextChanged, widgetNameChanged}) => {
     let inputElem, inputUrl, nameElem;
     return(
-        <div>
+        <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
                 <input className='form-control'
                        ref={node => inputUrl = node}
                        onChange={() => LinkHrefChanged(widget.id, inputUrl.value)}
-                       value={widget.href}
+                       value={widget.href === null? '' : widget.href}
                        placeholder='Link URL'
                        style={{marginTop:'5px'}}/>
                 <input className='form-control'
                        ref={node => inputElem = node}
                        onChange={() => LinkTextChanged(widget.id, inputElem.value)}
-                       value={widget.text}
+                       value={widget.text === null? '' : widget.text}
                        placeholder='Link Text'
                        style={{marginTop:'15px'}}/>
                 <input className='form-control'
                        placeholder='WidgetName'
                        onChange={() => widgetNameChanged(widget.id, nameElem.value)}
                        ref={node => nameElem = node}
-                       value={widget.name}
+                       value={widget.name === null? '' : widget.name}
                        style={{marginTop:'15px', marginBottom:'5px'}}/>
                 <h4>Preview</h4>
             </div>
