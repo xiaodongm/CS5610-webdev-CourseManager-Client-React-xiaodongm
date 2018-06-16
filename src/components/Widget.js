@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from  'react-redux'
-import {DELETE_WIDGET} from "../constants/Constants"
+import {DELETE_WIDGET, MOVE_WIDGET_UP, MOVE_WIDGET_DOWN} from "../constants/Constants"
 import * as actions from "../actions/Actions";
 
 const dispatchToPropsMapper = dispatch => ({
@@ -158,13 +158,13 @@ const List = ({widget, preview, ListTextChanged, ListTypeChanged}) => {
 const ListContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(List);
 
 const Link = ({widget, preview, LinkHrefChanged, LinkTextChanged}) => {
-    let inputElem;
+    let inputElem, inputUrl;
     return(
         <div>
             <div hidden={preview}>
                 <input className='form-control'
-                       ref={node => inputElem = node}
-                       onChange={() => LinkHrefChanged(widget.id, inputElem.value)}
+                       ref={node => inputUrl = node}
+                       onChange={() => LinkHrefChanged(widget.id, inputUrl.value)}
                        value={widget.href}
                        placeholder='Link URL'
                        style={{marginTop:'5px'}}/>
@@ -188,7 +188,7 @@ const Link = ({widget, preview, LinkHrefChanged, LinkTextChanged}) => {
 const LinkContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Link);
 
 
-const Widget = ({ widget, preview, dispatch }) => {
+const Widget = ({ widget, preview, dispatch, widgets }) => {
 
     let selectElement;
 
@@ -197,14 +197,18 @@ const Widget = ({ widget, preview, dispatch }) => {
             <div hidden={preview}>
                 <span style={{fontSize:'xx-large', fontWeight:'bold'}}>{widget.widgetType}</span>
                 <div className='float-right'>
-                    <button className='btn btn-warning'
+                    {widget.widgetOrder !== 0 && <button className='btn btn-warning'
+                            type='button'
+                            onClick={() => (dispatch({type: MOVE_WIDGET_UP, widget: widget}))}
                             style={{marginRight:'3px'}}>
                         <i className='fa fa-arrow-up'></i>
-                    </button>
-                    <button className='btn btn-warning'
+                    </button>}
+                    {widget.widgetOrder !== widgets.length - 1 && <button className='btn btn-warning'
+                            type='button'
+                            onClick={() => (dispatch({type: MOVE_WIDGET_DOWN, widget: widget}))}
                             style={{marginRight:'3px'}}>
                         <i className='fa fa-arrow-down'></i>
-                    </button>
+                    </button>}
                     <select ref={node => selectElement = node}
                             value={widget.widgetType}
                             style={{marginRight:'3px'}}

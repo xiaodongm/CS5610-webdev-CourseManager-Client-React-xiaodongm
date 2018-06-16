@@ -37,13 +37,13 @@ class WidgetList extends React.Component{
                 </div>
                 <div className='form-group row'
                      style={{marginTop:'-14px'}}>
-                    {/*<h3>WidgetList: {this.props.widgets.length}</h3>*/}
                 </div>
                 <div style={{marginLeft:'-12px'}}>
-                    {this.props.widgets.map(widget =>(
+                    {this.props.widgets.sort((x,y) => x.widgetOrder - y.widgetOrder).map(widget =>(
                         <WidgetContainer key={widget.id}
                                          preview={this.props.previewMode}
-                                         widget={widget}/>
+                                         widget={widget}
+                                         widgets = {this.props.widgets}/>
                     ))}
                 </div>
                 <button onClick={this.props.addWidget}

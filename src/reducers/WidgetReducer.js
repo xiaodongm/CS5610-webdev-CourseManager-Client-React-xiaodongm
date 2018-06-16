@@ -1,6 +1,23 @@
 import * as constants from "../constants/Constants"
 
+const switchIndex = (indexA, indexB, array) => {
+    let temp = array[indexA].widgetOrder;
+    array[indexA].widgetOrder = array[indexB].widgetOrder;
+    array[indexB].widgetOrder = temp;
+    array.sort((x,y) => x.widgetOrder - y.widgetOrder);
+    return array;
+};
+
+const resetWidgetOrder = (widgets) => {
+    for (var i = 0; i < widgets.length; i++){
+        widgets[i].widgetOrder = i;
+    }
+    return widgets;
+};
+
 export const widgetReducer = (state = {widgets: [], preview: false}, action) => {
+
+    let index;
 
     switch (action.type){
         case constants.ADD_WIDGET:
@@ -14,7 +31,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         size: '1',
                         src: '',
                         href: '',
-                        listType:'Unordered'
+                        listType:'Unordered',
+                        widgetOrder:state.widgets.length
                     }
                 ],
                 preview: state.preview
@@ -96,10 +114,12 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             };
 
         case constants.LINK_HREF_CHANGED:
+            console.log('117')
             return {
                 widgets: state.widgets.map(widget => {
                     if(widget.id === action.id) {
                         widget.href = action.href
+                        console.log(widget.href)
                     }
                     return Object.assign({}, widget)
                 }),
@@ -128,6 +148,30 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 preview: state.preview
             };
 
+        case constants.MOVE_WIDGET_UP:
+            index = state.widgets.indexOf(action.widget);
+            if(index === 0){
+                return state;
+            }else{
+                newState = {
+                    widgets: resetWidgetOrder(switchIndex(index, index - 1, state.widgets))
+                };
+                return JSON.parse(JSON.stringify(newState));
+            }
+
+
+        case constants.MOVE_WIDGET_DOWN:
+            index = state.widgets.indexOf(action.widget);
+            if(index >= state.widgets.length - 1){
+                return state;
+            }else{
+                newState = {
+                    widgets:resetWidgetOrder(switchIndex(index, index + 1, state.widgets))
+                };
+                return JSON.parse(JSON.stringify(newState));
+            }
+
+
         case constants.SAVE:
             fetch('http://localhost:8080/api/topic/topicId/widget'.replace('topicId', action.topicId), {
                 method: 'post',
@@ -141,7 +185,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             return {
                 widgets: state.widgets,
                 preview: !state.preview
-            }
+            };
 
         case constants.FIND_ALL_WIDGETS:
             newState = Object.assign({}, state);
