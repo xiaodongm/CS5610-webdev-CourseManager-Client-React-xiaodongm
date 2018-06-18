@@ -15,6 +15,7 @@ class WidgetList extends React.Component{
         }
     }
 
+
     render(){
         return(
             <form style={{marginLeft:'40px'}}>

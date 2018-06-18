@@ -33,7 +33,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         href: '',
                         listType:'Unordered',
                         widgetOrder:state.widgets.length,
-                        name: ''
+                        name: '',
+                        listItems: ''
                     }
                 ],
                 preview: state.preview
@@ -150,11 +151,11 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 preview: state.preview
             };
 
-        case constants.LIST_TEXT_CHANGED:
+        case constants.LIST_ITEMS_CHANGED:
             return {
                 widgets: state.widgets.map(widget => {
                     if(widget.id === action.id) {
-                        widget.text = action.text
+                        widget.listItems = action.listItems
                     }
                     return Object.assign({}, widget)
                 }),

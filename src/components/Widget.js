@@ -16,8 +16,8 @@ const dispatchToPropsMapper = dispatch => ({
         actions.LinkHrefChanged(dispatch, widgetId, newHref),
     LinkTextChanged: (widgetId, newText) =>
         actions.LinkTextChanged(dispatch, widgetId, newText),
-    ListTextChanged: (widgetId, newText) =>
-        actions.ListTextChanged(dispatch, widgetId, newText),
+    ListItemsChanged: (widgetId, newItems) =>
+        actions.ListItemsChanged(dispatch, widgetId, newItems),
     ListTypeChanged: (widgetId, newType) =>
         actions.ListTypeChanged(dispatch, widgetId, newType),
     widgetNameChanged: (widgetId, newName) =>
@@ -33,27 +33,51 @@ const Heading = ({widget, preview, headingSizeChanged, headingTextChanged, widge
     return(
         <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
+            <div className='form-group row' style={{marginTop:'15px'}}>
+                <label className='col-sm-1 col-form-label'
+                       htmlFor={widget.id + 'headingtext'}>
+                    <strong><em>Text</em></strong>
+                </label>
+                <div className='col-sm-11'>
                 <input onChange={() => headingTextChanged(widget.id, inputElem.value)}
-                       value={widget.text === null? '' : widget.text}
+                       id={widget.id + 'headingtext'}
+                       value={!widget.text? '' : widget.text}
                        placeholder='Heading Text'
                        className='form-control'
-                       style={{marginBottom:'10px', marginTop:'15px'}}
                        ref={node => inputElem = node}/>
+                </div>
+            </div>
+            <div className='form-group row'>
+                <label className='col-sm-1 col-form-label'
+                       htmlFor={widget.id + 'headingSize'}>
+                    <strong><em>Size</em></strong>
+                </label>
+                <div className='col-sm-11'>
                 <select ref={node => selectElem = node}
-                        value={widget.size === null? '1' : widget.size}
-                        style={{marginBottom:'10px'}}
+                        id={widget.id + 'headingSize'}
+                        value={!widget.size? '1' : widget.size}
                         className='form-control'
                         onChange={() => headingSizeChanged(widget.id, selectElem.value)}>
                     <option value="1">Heading 1</option>
                     <option value="2">Heading 2</option>
                     <option value="3">Heading 3</option>
                 </select>
+                </div>
+            </div>
+            <div className='form-group row'>
+                <label className='col-sm-1 col-form-label'
+                       htmlFor={widget.id + 'headingName'}>
+                    <strong><em>Name</em></strong>
+                </label>
+                <div className='col-sm-11'>
                 <input className='form-control'
+                       id={widget.id + 'headingName'}
                        placeholder='WidgetName'
-                       style={{marginBottom:'10px'}}
                        onChange={() => widgetNameChanged(widget.id, nameElem.value)}
                        ref={node => nameElem = node}
-                       value={widget.name === null? '' : widget.name}/>
+                       value={!widget.name? '' : widget.name}/>
+                </div>
+            </div>
             <h4>Preview</h4>
             </div>
             {widget.size == 1 && <h1>{widget.text}</h1>}
@@ -72,19 +96,36 @@ const Paragraph = ({widget, preview, paragraphTextChanged, widgetNameChanged}) =
     return(
         <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
-            <textarea className='form-control'
-                      placeholder='Paragraph Text'
-                      style={{marginTop:'5px'}}
-                      onChange={() => paragraphTextChanged(widget.id, inputElem.value)}
-                      value={widget.text === null? '' : widget.text}
-                      ref={node => inputElem = node}>
-            </textarea>
-            <input className='form-control'
-                   placeholder='WidgetName'
-                   onChange={() => widgetNameChanged(widget.id, nameElem.value)}
-                   ref={node => nameElem = node}
-                   value={widget.name === null? '' : widget.name}
-                   style={{marginTop:'15px', marginBottom:'5px'}}/>
+            <div className='form-group row' style={{marginTop:'15px'}}>
+                <label className='col-sm-1 col-form-label'
+                       htmlFor={widget.id + 'paragraphText'}>
+                    <strong><em>Text</em></strong>
+                </label>
+                <div className='col-sm-11'>
+                <textarea className='form-control'
+                          id={widget.id + 'paragraphText'}
+                          placeholder='Paragraph Text'
+                          style={{marginTop:'5px'}}
+                          onChange={() => paragraphTextChanged(widget.id, inputElem.value)}
+                          value={!widget.text? '' : widget.text}
+                          ref={node => inputElem = node}>
+                </textarea>
+                </div>
+            </div>
+            <div className='form-group row'>
+                <label className='col-sm-1 col-form-label'
+                       htmlFor={widget.id + 'paragraphName'}>
+                    <strong><em>Name</em></strong>
+                </label>
+                <div className='col-sm-11'>
+                <input className='form-control'
+                       id={widget.id + 'paragraphName'}
+                       placeholder='WidgetName'
+                       onChange={() => widgetNameChanged(widget.id, nameElem.value)}
+                       ref={node => nameElem = node}
+                       value={!widget.name? '' : widget.name}/>
+                </div>
+            </div>
             <h4>Preview</h4>
             </div>
             <p>{widget.text}</p>
@@ -99,18 +140,35 @@ const Image = ({widget, preview, ImageSrcChanged, widgetNameChanged}) => {
     return(
         <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
-                <input className='form-control'
-                       ref={node => inputElem = node}
-                       onChange={() => ImageSrcChanged(widget.id, inputElem.value)}
-                       style={{marginTop:'5px'}}
-                       value={widget.src === null? '' : widget.src}
-                        placeholder='Image URL'/>
-                <input className='form-control'
-                       placeholder='WidgetName'
-                       onChange={() => widgetNameChanged(widget.id, nameElem.value)}
-                       ref={node => nameElem = node}
-                       value={widget.name === null? '' : widget.name}
-                       style={{marginTop:'15px', marginBottom:'5px'}}/>
+                <div className='form-group row' style={{marginTop:'15px'}}>
+                    <label className='col-sm-1 col-form-label'
+                           htmlFor={widget.id + 'imageSrc'}>
+                        <strong><em>ImgSrc</em></strong>
+                    </label>
+                    <div className='col-sm-11'>
+                    <input className='form-control'
+                           id={widget.id + 'imageSrc'}
+                           ref={node => inputElem = node}
+                           onChange={() => ImageSrcChanged(widget.id, inputElem.value)}
+                           style={{marginTop:'5px'}}
+                           value={!widget.src? '' : widget.src}
+                            placeholder='Image URL'/>
+                    </div>
+                </div>
+                <div className='form-group row'>
+                    <label className='col-sm-1 col-form-label'
+                           htmlFor={widget.id + 'imageName'}>
+                        <strong><em>Name</em></strong>
+                    </label>
+                    <div className='col-sm-11'>
+                    <input className='form-control'
+                           id={widget.id + 'imageName'}
+                           placeholder='WidgetName'
+                           onChange={() => widgetNameChanged(widget.id, nameElem.value)}
+                           ref={node => nameElem = node}
+                           value={!widget.name? '' : widget.name}/>
+                    </div>
+                </div>
                 <h4>Preview</h4>
             </div>
             <img src={widget.src} alt='widgetImage'></img>
@@ -120,52 +178,85 @@ const Image = ({widget, preview, ImageSrcChanged, widgetNameChanged}) => {
 
 const ImageContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Image);
 
-const List = ({widget, preview, ListTextChanged, ListTypeChanged, widgetNameChanged}) => {
+const List = ({widget, preview, ListItemsChanged, ListTypeChanged, widgetNameChanged}) => {
     let inputElem, selectElem, nameElem;
     let key = 0;
     return(
         <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
-                <textarea className='form-control'
-                          ref={node => inputElem = node}
-                          onChange={() => ListTextChanged(widget.id, inputElem.value)}
-                          value={widget.text === null? '' : widget.text}
-                          placeholder='Enter one list item per line'
-                          style={{marginTop:'5px'}}>
-                </textarea>
-                <select className='form-control'
-                        style={{marginTop:'15px'}}
-                        ref={node => selectElem = node}
-                        value={widget.listType === null? 'Unordered' : widget.listType}
-                        onChange={() => ListTypeChanged(widget.id, selectElem.value)}>
-                    <option value='Unordered'>Unordered list</option>
-                    <option value='Ordered'>Ordered list</option>
-                </select>
-                <input className='form-control'
-                       placeholder='WidgetName'
-                       onChange={() => widgetNameChanged(widget.id, nameElem.value)}
-                       ref={node => nameElem = node}
-                       value={widget.name === null? '' : widget.name}
-                       style={{marginTop:'15px', marginBottom:'10px'}}/>
+                <div className='form-group row' style={{marginTop:'15px'}}>
+                    <label className='col-sm-1 col-form-label'
+                           htmlFor={widget.id + 'listItem'}>
+                        <strong><em>Items</em></strong>
+                    </label>
+                    <div className='col-sm-11'>
+                    <textarea className='form-control'
+                              id={widget.id + 'listItem'}
+                              ref={node => inputElem = node}
+                              onChange={() => ListItemsChanged(widget.id, inputElem.value)}
+                              value={!widget.listItems? '' : widget.listItems}
+                              placeholder='Enter one list item per line'
+                              style={{marginTop:'5px'}}>
+                    </textarea>
+                    </div>
+                </div>
+                <div className='form-group row'>
+                    <label className='col-sm-1 col-form-label'
+                           htmlFor={widget.id + 'listType'}>
+                        <strong><em>Type</em></strong>
+                    </label>
+                    <div className='col-sm-11'>
+                    <select className='form-control'
+                            id={widget.id + 'listType'}
+                            ref={node => selectElem = node}
+                            value={!widget.listType? 'Unordered' : widget.listType}
+                            onChange={() => ListTypeChanged(widget.id, selectElem.value)}>
+                        <option value='Unordered'>Unordered list</option>
+                        <option value='Ordered'>Ordered list</option>
+                    </select>
+                    </div>
+                </div>
+                <div className='form-group row'>
+                    <label className='col-sm-1 col-form-label'
+                           htmlFor={widget.id + 'listName'}>
+                        <strong><em>Name</em></strong>
+                    </label>
+                    <div className='col-sm-11'>
+                    <input className='form-control'
+                           id={widget.id + 'listName'}
+                           placeholder='WidgetName'
+                           onChange={() => widgetNameChanged(widget.id, nameElem.value)}
+                           ref={node => nameElem = node}
+                           value={!widget.name? '' : widget.name}/>
+                    </div>
+                </div>
                 <h4>Preview</h4>
             </div>
             <div>
-                <ul>
-                {widget.listType === 'Unordered' && widget.text.split('\n').map(listItem =>(
-                        <li key={++key}>
-                            {listItem}
-                        </li>
-
-                ))}
-                </ul>
-                <ol>
-                {widget.listType === 'Ordered' && widget.text.split('\n').map(listItem =>(
-
-                        <li key={++key}>
-                            {listItem}
-                        </li>
-                ))}
-                </ol>
+                <div>
+                    {(widget.listType === 'Unordered') &&
+                    <ul>
+                        {
+                            !widget.listItems? '' : widget.listItems.split('\n').map(listItem => (
+                                <li key={++key}>
+                                    {listItem}
+                                </li>
+                            ))
+                        }
+                    </ul>}
+                </div>
+                <div>
+                    {(widget.listType === 'Ordered') &&
+                    <ol>
+                        {
+                            !widget.listItems? '' : widget.listItems.split('\n').map(listItem => (
+                                <li key={++key}>
+                                    {listItem}
+                                </li>
+                            ))
+                        }
+                    </ol>}
+                </div>
             </div>
         </div>
     )
@@ -179,24 +270,48 @@ const Link = ({widget, preview, LinkHrefChanged, LinkTextChanged, widgetNameChan
     return(
         <div style={{marginBottom:'20px'}}>
             <div hidden={preview}>
-                <input className='form-control'
-                       ref={node => inputUrl = node}
-                       onChange={() => LinkHrefChanged(widget.id, inputUrl.value)}
-                       value={widget.href === null? '' : widget.href}
-                       placeholder='Link URL'
-                       style={{marginTop:'5px'}}/>
-                <input className='form-control'
-                       ref={node => inputElem = node}
-                       onChange={() => LinkTextChanged(widget.id, inputElem.value)}
-                       value={widget.text === null? '' : widget.text}
-                       placeholder='Link Text'
-                       style={{marginTop:'15px'}}/>
-                <input className='form-control'
-                       placeholder='WidgetName'
-                       onChange={() => widgetNameChanged(widget.id, nameElem.value)}
-                       ref={node => nameElem = node}
-                       value={widget.name === null? '' : widget.name}
-                       style={{marginTop:'15px', marginBottom:'5px'}}/>
+                <div className='form-group row' style={{marginTop:'15px'}}>
+                    <label className='col-sm-1 col-form-label'
+                           htmlFor={widget.id + 'linkURL'}>
+                        <strong><em>URL</em></strong>
+                    </label>
+                    <div className='col-sm-11'>
+                    <input className='form-control'
+                           ref={node => inputUrl = node}
+                           id={widget.id + 'linkURL'}
+                           onChange={() => LinkHrefChanged(widget.id, inputUrl.value)}
+                           value={!widget.href? '' : widget.href}
+                           placeholder='Link URL'/>
+                    </div>
+                </div>
+                <div className='form-group row'>
+                    <label className='col-sm-1 col-form-label'
+                           htmlFor={widget.id + 'linkText'}>
+                        <strong><em>Text</em></strong>
+                    </label>
+                    <div className='col-sm-11'>
+                    <input className='form-control'
+                           id={widget.id + 'linkText'}
+                           ref={node => inputElem = node}
+                           onChange={() => LinkTextChanged(widget.id, inputElem.value)}
+                           value={!widget.text? '' : widget.text}
+                           placeholder='Link Text'/>
+                    </div>
+                </div>
+                <div className='form-group row'>
+                    <label className='col-sm-1 col-form-label'
+                           htmlFor={widget.id + 'linkName'}>
+                        <strong><em>Name</em></strong>
+                    </label>
+                    <div className='col-sm-11'>
+                    <input className='form-control'
+                           id={widget.id + 'linkName'}
+                           placeholder='WidgetName'
+                           onChange={() => widgetNameChanged(widget.id, nameElem.value)}
+                           ref={node => nameElem = node}
+                           value={!widget.name? '' : widget.name}/>
+                    </div>
+                </div>
                 <h4>Preview</h4>
             </div>
             <a href={widget.href}>{widget.text}</a>
