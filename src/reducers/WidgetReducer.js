@@ -189,6 +189,17 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
 
 
         case constants.SAVE:
+            for(var i = 0; i < state.widgets.length; i++){
+                for(var j = 0; j < state.widgets.length; j++){
+                    if(i === j){
+                        continue;
+                    }
+                    if(state.widgets[i].name !== '' && state.widgets[i].name === state.widgets[j].name){
+                        alert('Widget name is duplicated, cannot save!');
+                        return state;
+                    }
+                }
+            }
             fetch('http://localhost:8080/api/topic/topicId/widget'.replace('topicId', action.topicId), {
                 method: 'post',
                 body: JSON.stringify(state.widgets),

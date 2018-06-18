@@ -58,9 +58,9 @@ const Heading = ({widget, preview, headingSizeChanged, headingTextChanged, widge
                         value={!widget.size? '1' : widget.size}
                         className='form-control'
                         onChange={() => headingSizeChanged(widget.id, selectElem.value)}>
-                    <option value="1">Heading 1</option>
-                    <option value="2">Heading 2</option>
-                    <option value="3">Heading 3</option>
+                    <option value="1">Heading Size 1</option>
+                    <option value="2">Heading Size 2</option>
+                    <option value="3">Heading Size 3</option>
                 </select>
                 </div>
             </div>
@@ -329,9 +329,9 @@ const Widget = ({ widget, preview, dispatch, widgets }) => {
 
     return(
         <div>
-            <div hidden={preview}>
+            <div>
                 <span style={{fontSize:'xx-large', fontWeight:'bold'}}>{widget.widgetType}</span>
-                <div className='float-right'>
+                <div className='float-right' hidden={preview}>
                     {widget.widgetOrder !== 0 && <button className='btn btn-warning'
                             type='button'
                             onClick={() => (dispatch({type: MOVE_WIDGET_UP, widget: widget}))}
