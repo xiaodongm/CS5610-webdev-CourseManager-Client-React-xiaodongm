@@ -214,7 +214,7 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 }
             }
             // fetch('http://localhost:8080/api/topic/topicId/widget'.replace('topicId', action.topicId), {
-            fetch('http://webdev-summerfull-2018-xma.herokuapp.com/api/topic/topicId/widget'.replace('topicId', action.topicId), {
+            fetch('https://webdev-summerfull-2018-xma.herokuapp.com/api/topic/topicId/widget'.replace('topicId', action.topicId), {
                 method: 'post',
                 body: JSON.stringify(state.widgets),
                 headers: {

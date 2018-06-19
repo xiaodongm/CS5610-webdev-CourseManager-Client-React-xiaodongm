@@ -5,8 +5,8 @@ export const addWidget = dispatch => (
 );
 
 export const findAllWidgets = dispatch => {
-    // fetch('http://localhost:8080/api/widget')
-    fetch('http://webdev-summerfull-2018-xma.herokuapp.com/api/widget')
+    // fetch('https://localhost:8080/api/widget')
+    fetch('https://webdev-summerfull-2018-xma.herokuapp.com/api/widget')
         .then(response => (response.json()))
         .then(widgets => dispatch({
             type: constants.FIND_ALL_WIDGETS,
@@ -14,8 +14,8 @@ export const findAllWidgets = dispatch => {
 };
 
 export const findAllWidgetsForTopic = (dispatch, topicId) => {
-        // fetch('http://localhost:8080/api/topic/topicId/widget'.replace('topicId', topicId))
-        fetch('http://webdev-summerfull-2018-xma.herokuapp.com/api/topic/topicId/widget'.replace('topicId', topicId))
+        // fetch('https://localhost:8080/api/topic/topicId/widget'.replace('topicId', topicId))
+        fetch('https://webdev-summerfull-2018-xma.herokuapp.com/api/topic/topicId/widget'.replace('topicId', topicId))
             .then(response => (response.json()))
             .then(widgets => dispatch({
                 type: constants.FIND_ALL_WIDGETS_FOR_TOPIC,
