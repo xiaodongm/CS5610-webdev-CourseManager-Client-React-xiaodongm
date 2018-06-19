@@ -1,7 +1,11 @@
 import React from 'react'
 import {connect} from  'react-redux'
-import {DELETE_WIDGET, MOVE_WIDGET_UP, MOVE_WIDGET_DOWN} from "../constants/Constants"
+import {DELETE_WIDGET, MOVE_WIDGET_UP, MOVE_WIDGET_DOWN, EDIT_MODE} from "../constants/Constants"
 import * as actions from "../actions/Actions";
+
+const stateToPropsMapper = state => ({
+    preview: state.preview
+});
 
 const dispatchToPropsMapper = dispatch => ({
     headingTextChanged: (widgetId, newText) =>
@@ -24,15 +28,11 @@ const dispatchToPropsMapper = dispatch => ({
         actions.widgetNameChanged(dispatch, widgetId, newName)
 });
 
-const stateToPropsMapper = state => ({
-    preview: state.preview
-});
-
 const Heading = ({widget, preview, headingSizeChanged, headingTextChanged, widgetNameChanged}) => {
     let selectElem, inputElem, nameElem;
     return(
         <div style={{marginBottom:'20px'}}>
-            <div hidden={preview}>
+            <div hidden={widget.editMode? false : preview}>
             <div className='form-group row' style={{marginTop:'15px'}}>
                 <label className='col-sm-1 col-form-label'
                        htmlFor={widget.id + 'headingtext'}>
@@ -88,14 +88,13 @@ const Heading = ({widget, preview, headingSizeChanged, headingTextChanged, widge
 };
 
 
-
 const HeadingContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Heading);
 
 const Paragraph = ({widget, preview, paragraphTextChanged, widgetNameChanged}) => {
     let inputElem, nameElem;
     return(
         <div style={{marginBottom:'20px'}}>
-            <div hidden={preview}>
+            <div hidden={widget.editMode? false : preview}>
             <div className='form-group row' style={{marginTop:'15px'}}>
                 <label className='col-sm-1 col-form-label'
                        htmlFor={widget.id + 'paragraphText'}>
@@ -139,7 +138,7 @@ const Image = ({widget, preview, ImageSrcChanged, widgetNameChanged}) => {
     let inputElem, nameElem;
     return(
         <div style={{marginBottom:'20px'}}>
-            <div hidden={preview}>
+            <div hidden={widget.editMode? false : preview}>
                 <div className='form-group row' style={{marginTop:'15px'}}>
                     <label className='col-sm-1 col-form-label'
                            htmlFor={widget.id + 'imageSrc'}>
@@ -183,7 +182,7 @@ const List = ({widget, preview, ListItemsChanged, ListTypeChanged, widgetNameCha
     let key = 0;
     return(
         <div style={{marginBottom:'20px'}}>
-            <div hidden={preview}>
+            <div hidden={widget.editMode? false : preview}>
                 <div className='form-group row' style={{marginTop:'15px'}}>
                     <label className='col-sm-1 col-form-label'
                            htmlFor={widget.id + 'listItem'}>
@@ -269,7 +268,7 @@ const Link = ({widget, preview, LinkHrefChanged, LinkTextChanged, widgetNameChan
     let inputElem, inputUrl, nameElem;
     return(
         <div style={{marginBottom:'20px'}}>
-            <div hidden={preview}>
+            <div hidden={widget.editMode? false : preview}>
                 <div className='form-group row' style={{marginTop:'15px'}}>
                     <label className='col-sm-1 col-form-label'
                            htmlFor={widget.id + 'linkURL'}>
@@ -317,7 +316,6 @@ const Link = ({widget, preview, LinkHrefChanged, LinkTextChanged, widgetNameChan
             <a href={widget.href}>{widget.text}</a>
         </div>
     )
-
 };
 
 const LinkContainer = connect(stateToPropsMapper, dispatchToPropsMapper)(Link);
@@ -330,8 +328,14 @@ const Widget = ({ widget, preview, dispatch, widgets }) => {
     return(
         <div>
             <div>
-                <span style={{fontSize:'xx-large', fontWeight:'bold'}}>{widget.widgetType}</span>
-                <div className='float-right' hidden={preview}>
+                <span style={{fontSize:'xx-large', fontWeight:'bold'}}>{widget.widgetType} Widget</span>
+                <button className='btn btn-outline-warning'
+                        type='button'
+                        onClick={() => dispatch({type: EDIT_MODE, id : widget.id})}
+                        style={{marginLeft: '10px', marginBottom: '12px'}}>
+                    Edit
+                </button>
+                <div className='float-right' hidden={widget.editMode? false : preview}>
                     {widget.widgetOrder !== 0 && <button className='btn btn-warning'
                             type='button'
                             onClick={() => (dispatch({type: MOVE_WIDGET_UP, widget: widget}))}
@@ -375,8 +379,8 @@ const Widget = ({ widget, preview, dispatch, widgets }) => {
             </div>
         </div>
     )
-
 };
+
 
 const WidgetContainer = connect(state => ({
     preview: state.preview

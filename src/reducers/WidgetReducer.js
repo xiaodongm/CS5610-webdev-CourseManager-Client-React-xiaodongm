@@ -34,7 +34,8 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                         listType:'Unordered',
                         widgetOrder:state.widgets.length,
                         name: '',
-                        listItems: ''
+                        listItems: '',
+                        editMode: false
                     }
                 ],
                 preview: state.preview
@@ -128,11 +129,11 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
             };
 
         case constants.LINK_HREF_CHANGED:
-            console.log('117')
+            console.log('117');
             return {
                 widgets: state.widgets.map(widget => {
                     if(widget.id === action.id) {
-                        widget.href = action.href
+                        widget.href = action.href;
                         console.log(widget.href)
                     }
                     return Object.assign({}, widget)
@@ -187,6 +188,18 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
                 return JSON.parse(JSON.stringify(newState));
             }
 
+        case constants.EDIT_MODE:
+            return {
+                widgets: state.widgets.map(widget => {
+                    if(widget.id === action.id) {
+                        widget.editMode = !widget.editMode
+
+                    }
+                    return Object.assign({}, widget)
+                }),
+                preview: state.preview
+            };
+
 
         case constants.SAVE:
             for(var i = 0; i < state.widgets.length; i++){
@@ -210,7 +223,12 @@ export const widgetReducer = (state = {widgets: [], preview: false}, action) => 
 
         case constants.PREVIEW:
             return {
-                widgets: state.widgets,
+                widgets: state.widgets.map(
+                    widget => {
+                        widget.editMode = false;
+                        return Object.assign({}, widget);
+                    }
+                ),
                 preview: !state.preview
             };
 

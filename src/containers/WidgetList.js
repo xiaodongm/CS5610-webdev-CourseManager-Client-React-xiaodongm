@@ -23,7 +23,7 @@ class WidgetList extends React.Component{
                      className='form-group row'>
                     <div className='col-12'>
                         <button onClick={this.props.preview}
-                                className='btn badge-warning float-right'
+                                className='btn btn-warning float-right'
                                 type='button'>
                             Preview
                         </button>
